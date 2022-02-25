@@ -8,7 +8,7 @@ using UnityEngine;
 // Version of DelaunatorSharp's Point struct that is aware of its connections to other nodes/points.
 // In DelaunatorSharp
 // See README.md or Map.cs for more details on credits.
-public struct Node : IPoint
+public class Node : IPoint
 {
     public double X { get; set; }
 
@@ -19,14 +19,20 @@ public struct Node : IPoint
         X = x;
         Y = y;
         Links = new List<Node>();
-        Obj = null;
+        _obj = null;
     }
 
     // List of all other nodes that this node is connected to.
     public List<Node> Links;
     
     // GameObject tied to this node.
-    public GameObject Obj;
+    private GameObject _obj;
+
+    public GameObject Obj
+    {
+        get { return _obj; }
+        set { _obj = value; }
+    }
 
     public override string ToString() => string.Format("{0},{1}", (object) this.X, (object) this.Y);
 }

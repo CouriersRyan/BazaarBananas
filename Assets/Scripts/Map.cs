@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,11 @@ using UnityEngine.Android;
 public class Map : MonoBehaviour
 {
     //TODO Set up A* Alogrithm for path finding.
+    //TODO there are tons of stray nodes, use A* to cull for the useful ones.
+    
     //TODO Set up events to run into.
     //TODO Set up player with resources.
-    //MVC for player/GUI where it retreaves events to process.
+    //MVC for player/GUI where it retrieves events to process.
 
     [SerializeField] private GameObject nodePrefab;
 
@@ -79,6 +82,7 @@ public class Map : MonoBehaviour
             UniformPoissonDiskSampler.SampleCircle(Vector2.zero, generationSize, generationMinDistance);
         _nodes = sampler.Select(point => new Vector2(point.x, point.y)).ToNodes().ToList();
         Debug.Log($"Generated Points Count {_nodes.Count}");
+
         CreateDelaunay();
     }
 
@@ -101,10 +105,11 @@ public class Map : MonoBehaviour
 
         _delaunator.ForEachTriangleEdge(edge =>
         {
+            float TOLERANCE = 0.01f;
             // Address to equivalent nodes in the _nodes list. *New code*
-            var p = _nodes.Find(node => node.X == edge.P.X && node.Y == edge.P.Y);
-            var q = _nodes.Find(node => node.X == edge.Q.X && node.Y == edge.Q.Y);
-            
+            var p = _nodes.Find(node => Math.Abs(node.X - edge.P.X) < TOLERANCE && Math.Abs(node.Y - edge.P.Y) < TOLERANCE);
+            var q = _nodes.Find(node => Math.Abs(node.X - edge.Q.X) < TOLERANCE && Math.Abs(node.Y - edge.Q.Y) < TOLERANCE);
+            var index = _nodes.FindIndex(node => Math.Abs(node.X - edge.P.X) < TOLERANCE && Math.Abs(node.Y - edge.P.Y) < TOLERANCE);
             // Draws lines between points based on the edges outputted by triangulation.
             CreateLine(_trianglesContainer, $"TriangleEdge - {edge.Index}", new Vector3[] { edge.P.ToVector3(), edge.Q.ToVector3() }, edgeColor, edgeWidth, 0);
             
@@ -112,10 +117,14 @@ public class Map : MonoBehaviour
             if(!p.Links.Contains(q)) p.Links.Add(q);
             if(!q.Links.Contains(p)) q.Links.Add(p);
             
-            // Instantiates nodes on the points generated.
-            var pointGameObject = Instantiate(nodePrefab, _pointsContainer);
-                pointGameObject.transform.SetPositionAndRotation(edge.P.ToVector3(), Quaternion.identity);
+            if (_nodes[index].Obj == null)
+            {
+                // Instantiates nodes on the points generated.
+                var pointGameObject = Instantiate(nodePrefab, _pointsContainer);
+                pointGameObject.transform.SetPositionAndRotation(p.ToVector3(), Quaternion.identity);
                 p.Obj = pointGameObject; //Makes node aware of the gameObject.
+                pointGameObject.GetComponent<MapNode>().SetNode(p);
+            }
         });
     }
     
