@@ -21,7 +21,7 @@ public class Map : MonoBehaviour
 
     [SerializeField] private GameObject nodePrefab;
 
-    private List<IPoint> _points = new List<IPoint>();
+    private List<Node> _nodes = new List<Node>(); // A list of all nodes in the map.
 
     private Delaunator _delaunator;
 
@@ -77,18 +77,18 @@ public class Map : MonoBehaviour
 
         var sampler = 
             UniformPoissonDiskSampler.SampleCircle(Vector2.zero, generationSize, generationMinDistance);
-        _points = sampler.Select(point => new Vector2(point.x, point.y)).ToPoints().ToList();
-        Debug.Log($"Generated Points Count {_points.Count}");
+        _nodes = sampler.Select(point => new Vector2(point.x, point.y)).ToNodes().ToList();
+        Debug.Log($"Generated Points Count {_nodes.Count}");
         CreateDelaunay();
     }
 
     private void CreateDelaunay()
     {
-        if(_points.Count < 3) return; //Cannot create a triangle if there are less than 3 points.
+        if(_nodes.Count < 3) return; //Cannot create a triangle if there are less than 3 points.
         
         ClearMap();
 
-        _delaunator = new Delaunator(_points.ToArray());
+        _delaunator = new Delaunator(_nodes.OfType<IPoint>().ToArray());
 
         CreateTriangle();
 
@@ -101,12 +101,21 @@ public class Map : MonoBehaviour
 
         _delaunator.ForEachTriangleEdge(edge =>
         {
+            // Address to equivalent nodes in the _nodes list. *New code*
+            var p = _nodes.Find(node => node.X == edge.P.X && node.Y == edge.P.Y);
+            var q = _nodes.Find(node => node.X == edge.Q.X && node.Y == edge.Q.Y);
+            
             // Draws lines between points based on the edges outputted by triangulation.
             CreateLine(_trianglesContainer, $"TriangleEdge - {edge.Index}", new Vector3[] { edge.P.ToVector3(), edge.Q.ToVector3() }, edgeColor, edgeWidth, 0);
+            
+            // Creates links to each other. *New code*
+            if(!p.Links.Contains(q)) p.Links.Add(q);
+            if(!q.Links.Contains(p)) q.Links.Add(p);
             
             // Instantiates nodes on the points generated.
             var pointGameObject = Instantiate(nodePrefab, _pointsContainer);
                 pointGameObject.transform.SetPositionAndRotation(edge.P.ToVector3(), Quaternion.identity);
+                p.Obj = pointGameObject; //Makes node aware of the gameObject.
         });
     }
     
