@@ -10,6 +10,9 @@ using UnityEngine;
 // See README.md or Map.cs for more details on credits.
 public class Node : IPoint
 {
+
+    public int timesPathed = 0;
+    
     public double X { get; set; }
 
     public double Y { get; set; }

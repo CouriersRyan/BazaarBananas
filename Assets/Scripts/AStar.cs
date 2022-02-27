@@ -24,7 +24,7 @@ public class AStar
         {
             var currPath = FindPath(start, end, allNodesList);
             _paths.Add(currPath);
-            ExcludeRandomNode(currPath);
+            ExcludeNodes(currPath, reps);
         }
 
         return _paths;
@@ -126,6 +126,7 @@ public class AStar
         {
             path.Add(node.PrevNode);
             node = node.PrevNode;
+            node.timesPathed++;
         }
         path.Reverse();
         return path;
@@ -136,5 +137,15 @@ public class AStar
     private void ExcludeRandomNode(List<Node> path)
     {
         path[Random.Range(1, path.Count - 1)].isExcluded = true;
+    }
+
+    private void ExcludeNodes(List<Node> path, int reps)
+    {
+        ExcludeRandomNode(path);
+
+        for (int i = 1; i < path.Count - 1; i++)
+        {
+            if (path[i].timesPathed > reps / 2) path[i].isExcluded = true;
+        }
     }
 }

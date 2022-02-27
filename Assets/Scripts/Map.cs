@@ -31,18 +31,23 @@ public class Map : MonoBehaviour
     private Transform _pointsContainer;
     private Transform _trianglesContainer;
 
-    //Poisson Disk Sample Generation
+    
     [Header("Generation")] [SerializeField]
+    
+    //Poisson Disk Sample Generation
     private float generationSize = 10; //Radius of the generation
-
     [SerializeField] private float generationMinDistance = 1f; //Smallest distance between nodes
-
-    [Header("Lines")] [SerializeField] private float edgeWidth = 0.2f;
-    [SerializeField] private Color edgeColor = Color.black;
-    [SerializeField] protected Material lineMaterial;
     
     //Class that handles AStar Algorithm
     private AStar _pathfinding;
+    [SerializeField] private int numOfPaths = 4;
+
+    [Header("Lines")]
+    [SerializeField] private float edgeWidth = 0.2f;
+    [SerializeField] private Color edgeColor = Color.black;
+    [SerializeField] protected Material lineMaterial;
+    
+    
 
     void Start()
     {
@@ -50,7 +55,7 @@ public class Map : MonoBehaviour
         _startNode = FindSouthmostNode();
         _endNode = FindNorthmostNode();
         _pathfinding = new AStar();
-        CreatePaths(_pathfinding.FindPaths(_startNode, _endNode, _nodes, 5));
+        CreatePaths(_pathfinding.FindPaths(_startNode, _endNode, _nodes, numOfPaths));
     }
     
     void Update()
