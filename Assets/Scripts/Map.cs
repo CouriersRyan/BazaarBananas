@@ -15,9 +15,6 @@ using UnityEngine.Android;
 // Inspiration to use A* star with the above package was inspired by yurkth. https://github.com/yurkth/stsmapgen
 public class Map : MonoBehaviour
 {
-    //TODO Set up A* Alogrithm for path finding.
-    //TODO there are tons of stray nodes, use A* to cull for the useful ones.
-    
     //TODO Set up events to run into.
     //TODO Set up player with resources.
     //MVC for player/GUI where it retrieves events to process.
@@ -25,6 +22,8 @@ public class Map : MonoBehaviour
     [SerializeField] private GameObject nodePrefab;
 
     private List<Node> _nodes = new List<Node>(); // A list of all nodes in the map.
+    private Node _startNode;
+    private Node _endNode;
 
     private Delaunator _delaunator;
 
@@ -42,9 +41,16 @@ public class Map : MonoBehaviour
     [SerializeField] private Color edgeColor = Color.black;
     [SerializeField] protected Material lineMaterial;
     
+    //Class that handles AStar Algorithm
+    private AStar _pathfinding;
+
     void Start()
     {
         GenerateMap();
+        _startNode = FindSouthmostNode();
+        _endNode = FindNorthmostNode();
+        _pathfinding = new AStar();
+        CreatePaths(_pathfinding.FindPaths(_startNode, _endNode, _nodes, 5));
     }
     
     void Update()
@@ -69,6 +75,8 @@ public class Map : MonoBehaviour
      * minimum distance and no closer.
      * 
      */
+    
+    //Creates a map of connected nodes.
     private void GenerateMap()
     {
         // Poisson sampler to create points.
@@ -85,7 +93,8 @@ public class Map : MonoBehaviour
 
         CreateDelaunay();
     }
-
+    
+    // Triangulates a list of nodes and minimize acute angles.
     private void CreateDelaunay()
     {
         if(_nodes.Count < 3) return; //Cannot create a triangle if there are less than 3 points.
@@ -110,21 +119,10 @@ public class Map : MonoBehaviour
             var p = _nodes.Find(node => Math.Abs(node.X - edge.P.X) < TOLERANCE && Math.Abs(node.Y - edge.P.Y) < TOLERANCE);
             var q = _nodes.Find(node => Math.Abs(node.X - edge.Q.X) < TOLERANCE && Math.Abs(node.Y - edge.Q.Y) < TOLERANCE);
             var index = _nodes.FindIndex(node => Math.Abs(node.X - edge.P.X) < TOLERANCE && Math.Abs(node.Y - edge.P.Y) < TOLERANCE);
-            // Draws lines between points based on the edges outputted by triangulation.
-            CreateLine(_trianglesContainer, $"TriangleEdge - {edge.Index}", new Vector3[] { edge.P.ToVector3(), edge.Q.ToVector3() }, edgeColor, edgeWidth, 0);
             
             // Creates links to each other. *New code*
             if(!p.Links.Contains(q)) p.Links.Add(q);
             if(!q.Links.Contains(p)) q.Links.Add(p);
-            
-            if (_nodes[index].Obj == null)
-            {
-                // Instantiates nodes on the points generated.
-                var pointGameObject = Instantiate(nodePrefab, _pointsContainer);
-                pointGameObject.transform.SetPositionAndRotation(p.ToVector3(), Quaternion.identity);
-                p.Obj = pointGameObject; //Makes node aware of the gameObject.
-                pointGameObject.GetComponent<MapNode>().SetNode(p);
-            }
         });
     }
     
@@ -170,5 +168,71 @@ public class Map : MonoBehaviour
         }
 
         _trianglesContainer = new GameObject(nameof(_trianglesContainer)).transform;
+    }
+
+    private Node FindSouthmostNode()
+    {
+        var southmostNode = _nodes[0];
+        foreach (var node in _nodes)
+        {
+            if (node.Y < southmostNode.Y)
+            {
+                southmostNode = node;
+            }
+        }
+
+        return southmostNode;
+    }
+    
+    private Node FindNorthmostNode()
+    {
+        var northmostNode = _nodes[0];
+        foreach (var node in _nodes)
+        {
+            if (node.Y > northmostNode.Y)
+            {
+                northmostNode = node;
+            }
+        }
+
+        return northmostNode;
+    }
+    
+    //Instantiates gameObjects to represent paths from the list of paths given.
+    private void CreatePaths(List<List<Node>> paths)
+    {
+        //Clear all existing links to prepare to reconnect them with the list of paths.
+        foreach (var node in _nodes)
+        {
+            node.Links.Clear();
+        }
+        
+        
+        foreach (var path in paths)
+        {
+            Node prevNode = null;
+            foreach (var node in path)
+            {
+                if (node.Obj == null)
+                {
+                    // Instantiates nodes on the points generated.
+                    var pointGameObject = Instantiate(nodePrefab, _pointsContainer);
+                    pointGameObject.transform.SetPositionAndRotation(node.ToVector3(), Quaternion.identity);
+                    node.Obj = pointGameObject; //Makes node aware of the gameObject.
+                    pointGameObject.GetComponent<MapNode>().SetNode(node);
+                }
+                
+                if (prevNode != null)
+                {
+                    // Draws lines between nodes on a path.
+                    CreateLine(_trianglesContainer, "Path", new Vector3[] { prevNode.ToVector3(), node.ToVector3() }, edgeColor, edgeWidth, 0);
+                    
+                    // Previously, links to other nodes were two-way, now that paths have been established we redefine
+                    // the links as one way.
+                    prevNode.Links.Add(node); // Adds the current node as a link of the previous Node
+                }
+                prevNode = node;
+            }
+        }
     }
 }

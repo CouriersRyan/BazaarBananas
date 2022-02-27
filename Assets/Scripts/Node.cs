@@ -33,6 +33,21 @@ public class Node : IPoint
         get { return _obj; }
         set { _obj = value; }
     }
+    
+    // A* Variables
+    private float _gCost; //Cost of moving to this node from the start.
+    private float _hCost; //Heuristic cost of this node to the end.
+    public float GCost { get; set; }
+    public float HCost { get; set; }
+    
+    // Combined g and h costs. Total cost of the node.
+    public float FCost 
+    {
+        get { return GCost + HCost; }
+    }
+
+    public Node PrevNode; // The node that precedes this one in the path.
+    public bool isExcluded = false; // Whether or not to exclude this node from pathfinding.
 
     public override string ToString() => string.Format("{0},{1}", (object) this.X, (object) this.Y);
 }
