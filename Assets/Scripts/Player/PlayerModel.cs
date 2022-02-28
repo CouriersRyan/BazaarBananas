@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class PlayerModel : ITradeResources
+// Model portion of the Player MVC
+// Holds the states of the Player FSM, values for navigating the map, and resources the player has.
+[Serializable] public class PlayerModel : ITradeResources
 {
     // Player FSM
     [NonSerialized] public readonly PlayerStateBase stateSelect = new PlayerStateSelect();
@@ -23,6 +24,7 @@ public class PlayerModel : ITradeResources
             state = value;
         }
     }
+    
     
     // For trading.
     public int Gold { get; set; } // Gold

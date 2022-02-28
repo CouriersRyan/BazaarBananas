@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// The View portion of the Player MVC.
+// The MonoBehavior that exists in the scene.
 public class PlayerView : MonoBehaviour
 {
+    // FSM
     [SerializeField] private PlayerModel model;
     private PlayerController _controller;
     
-    //TODO Player can click on the next node and move to that node. (State)
-    //     TODO Refer to map of nodes to know which node to move to next.
     //TODO Player can buy and sell resources on the market. (State)
     //     TODO Randomly generate exchange rates and GUI for displaying it. 
     //TODO Player can choose which resources to spend at events. (State)
@@ -16,13 +17,12 @@ public class PlayerView : MonoBehaviour
     
     // States: Select node -> move -> event/merchant -> repeat
     
-    // Start is called before the first frame update
     void Start()
     {
         _controller = new PlayerController(model);
     }
 
-    // Update is called once per frame
+    // Updates the game every frame using logic from the controller.
     void Update()
     {
         _controller.Update();

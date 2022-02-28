@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Player state for when the player needs to select the next node to move to.
 public class PlayerStateSelect : PlayerStateBase
 {
     public override void StateEnter(PlayerController controller)
@@ -19,6 +20,7 @@ public class PlayerStateSelect : PlayerStateBase
 
             if (hit.collider != null)
             {
+                // If the player clicks a node linked to the current node, move to that node.
                 if (hit.collider.CompareTag("Node"))
                 {
                     MapNode mapNode = hit.collider.gameObject.GetComponent<MapNode>();

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Game Manager Singleton to hold global variables.
 public class GameManager : MonoBehaviour
 {
     // Singleton implementation, copied from Class 4 slides w/o implementation as a Generic

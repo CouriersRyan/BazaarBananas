@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Player state for when the pawn is in the middle of moving between nodes on the map.
 public class PlayerStateMove : PlayerStateBase
 {
     public override void StateEnter(PlayerController controller)
