@@ -22,4 +22,9 @@ public class MapNode : MonoBehaviour
     {
         this.node = node;
     }
+    
+    public Node GetNode()
+    {
+        return node;
+    }
 }

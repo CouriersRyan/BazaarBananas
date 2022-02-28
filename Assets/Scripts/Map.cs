@@ -24,7 +24,15 @@ public class Map : MonoBehaviour
     private List<Node> _nodes = new List<Node>(); // A list of all nodes in the map.
     private Node _startNode;
     private Node _endNode;
-
+    public Node StartNode
+    {
+        get { return _startNode; }
+    }
+    public Node EndNode
+    {
+        get { return _endNode; }
+    }
+    
     private Delaunator _delaunator;
 
     //Empty gameobjects that act as the parents of the points and edges generated.
