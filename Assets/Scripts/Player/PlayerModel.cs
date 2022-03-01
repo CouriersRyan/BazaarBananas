@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Model portion of the Player MVC
-// Holds the states of the Player FSM, values for navigating the map, and resources the player has.
+// Holds resources the player has and values for lerping.
 [Serializable] public class PlayerModel : ITradeResources
 {
 
