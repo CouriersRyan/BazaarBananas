@@ -5,12 +5,12 @@ using UnityEngine;
 // Player state for when the player needs to select the next node to move to.
 public class PlayerStateSelect : PlayerStateBase
 {
-    public override void StateEnter(PlayerController controller)
+    public override void StateEnter(PlayerController controller, PlayerView view)
     {
         
     }
 
-    public override void StateUpdate(PlayerController controller)
+    public override void StateUpdate(PlayerController controller, PlayerView view)
     {
         if (Input.GetMouseButtonUp(0))
         {
@@ -24,13 +24,14 @@ public class PlayerStateSelect : PlayerStateBase
                 if (hit.collider.CompareTag("Node"))
                 {
                     MapNode mapNode = hit.collider.gameObject.GetComponent<MapNode>();
-                    controller.CheckValidNode(mapNode.GetNode());
+                    if(controller.CheckValidNode(mapNode.GetNode())){
+                        view.SetState(view.stateMove);}
                 }
             }
         }
     }
 
-    public override void StateExit(PlayerController controller)
+    public override void StateExit(PlayerController controller,PlayerView view)
     {
         
     }

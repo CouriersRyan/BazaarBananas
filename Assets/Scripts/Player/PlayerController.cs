@@ -15,17 +15,10 @@ public class PlayerController
         this.model = model;
         this.model.currentNode = GameManager.Instance.GetMap().StartNode;
         this.model.pawn.position = this.model.currentNode.ToVector2();
-        SetState(this.model.stateSelect);
-    }
-
-    // Called to update the game logic.
-    public void Update()
-    {
-        model.State.StateUpdate(this);
     }
 
     // Checks if the selected node is valid for moving. If it is, move to it.
-    public void CheckValidNode(Node target)
+    public bool CheckValidNode(Node target)
     {
         bool isValid = false;
         foreach (var node in model.currentNode.Links)
@@ -38,8 +31,9 @@ public class PlayerController
         if (isValid)
         {
             SetTargetNode(target);
-            SetState(model.stateMove);
         }
+
+        return isValid;
     }
     
     // Set the selected node for the pawn to move to.
@@ -55,21 +49,5 @@ public class PlayerController
     public Vector2 MoveToTargetNode(float time)
     {
         return model.pawn.position = Vector2.Lerp(model.lerpFrom, model.lerpTo, time);
-    }
-
-    // Sets the state in the FSM.
-    public void SetState(PlayerStateBase newState)
-    {
-        if (model.State != null)
-        {
-            model.State.StateExit(this);
-        }
-
-        model.State = newState;
-
-        if (model.State != null)
-        {
-            model.State.StateEnter(this);
-        }
     }
 }

@@ -7,25 +7,7 @@ using UnityEngine;
 // Holds the states of the Player FSM, values for navigating the map, and resources the player has.
 [Serializable] public class PlayerModel : ITradeResources
 {
-    // Player FSM
-    [NonSerialized] public readonly PlayerStateBase stateSelect = new PlayerStateSelect();
-    [NonSerialized] public readonly PlayerStateBase stateMove = new PlayerStateMove();
-    [NonSerialized] public readonly PlayerStateBase stateEvent = new PlayerStateEvent();
-    [NonSerialized] private PlayerStateBase state;
 
-    public PlayerStateBase State
-    {
-        get
-        {
-            return state;
-        }
-        set
-        {
-            state = value;
-        }
-    }
-    
-    
     // For trading.
     public int Gold { get; set; } // Gold
     public int Protection { get; set; } // Red

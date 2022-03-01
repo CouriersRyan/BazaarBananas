@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,11 +21,46 @@ public class PlayerView : MonoBehaviour
     void Start()
     {
         _controller = new PlayerController(model);
+        SetState(stateSelect);
     }
 
     // Updates the game every frame using logic from the controller.
     void Update()
     {
-        _controller.Update();
+        State.StateUpdate(_controller, this);
+    }
+    
+    // Player FSM
+    [NonSerialized] public readonly PlayerStateBase stateSelect = new PlayerStateSelect();
+    [NonSerialized] public readonly PlayerStateBase stateMove = new PlayerStateMove();
+    [NonSerialized] public readonly PlayerStateBase stateEvent = new PlayerStateEvent();
+    [NonSerialized] private PlayerStateBase state;
+
+    public PlayerStateBase State
+    {
+        get
+        {
+            return state;
+        }
+        set
+        {
+            state = value;
+        }
+    }
+    
+    // Sets the state in the FSM.
+    public void SetState(PlayerStateBase newState)
+    {
+        if (State != null)
+        {
+            State.StateExit(_controller, this);
+        }
+
+        State = newState;
+
+        if (State != null)
+        {
+            State.StateEnter(_controller, this);
+        }
     }
 }
