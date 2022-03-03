@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class MapNode : MonoBehaviour
 {
+    private EventMenu _eventMenu;
+    private Market _market;
+        
+    
     private Node node;
 
     // Start is called before the first frame update

@@ -15,10 +15,6 @@ using UnityEngine.Android;
 // Inspiration to use A* star with the above package was inspired by yurkth. https://github.com/yurkth/stsmapgen
 public class Map : MonoBehaviour
 {
-    //TODO Set up events to run into.
-    //TODO Set up player with resources.
-    //MVC for player/GUI where it retrieves events to process.
-
     [SerializeField] private GameObject nodePrefab;
 
     private List<Node> _nodes = new List<Node>(); // A list of all nodes in the map.
@@ -65,13 +61,8 @@ public class Map : MonoBehaviour
         _pathfinding = new AStar();
         CreatePaths(_pathfinding.FindPaths(_startNode, _endNode, _nodes, numOfPaths));
     }
-    
-    void Update()
-    {
-        
-    }
 
-    
+
     /*
      * The following code is modified from the DelaunatorSharp Package
      * DelaunatorPreview.cs

@@ -9,10 +9,54 @@ using UnityEngine;
 {
 
     // For trading.
-    public int Gold { get; set; } // Gold
-    public int Protection { get; set; } // Red
-    public int Tools { get; set; } // Blue
-    public int Food { get; set; } // Green
+    [SerializeField] private int gold;
+    [SerializeField] private int protection;
+    [SerializeField] private int tools;
+    [SerializeField] private int food;
+    public int Gold
+    {
+        get
+        {
+            return gold;
+        }
+        set
+        {
+            gold = value;
+        }
+    } // White
+    public int Protection { 
+        get
+        {
+            return protection;
+        }
+        set
+        {
+            protection = value;
+        } 
+    } // Red
+    public int Tools {
+        get
+        {
+            return tools;
+        }
+        set
+        {
+            tools = value;
+        }
+        
+    } // Blue
+    public int Food {
+        get
+        {
+            return food;
+        }
+        set
+        {
+            food = value;
+        }
+        
+    } // Green
+    
     
     // For map navigation
     [NonSerialized] public Node currentNode;

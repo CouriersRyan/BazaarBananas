@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 // The View portion of the Player MVC.
@@ -10,6 +11,12 @@ public class PlayerView : MonoBehaviour
     // FSM
     [SerializeField] private PlayerModel model;
     private PlayerController _controller;
+    
+    // UI References
+    [SerializeField] private TMP_Text goldText;
+    [SerializeField] private TMP_Text protectionText;
+    [SerializeField] private TMP_Text toolsText;
+    [SerializeField] private TMP_Text foodText;
     
     //TODO Player can buy and sell resources on the market. (State)
     //     TODO Randomly generate exchange rates and GUI for displaying it. 
@@ -31,6 +38,7 @@ public class PlayerView : MonoBehaviour
     void Update()
     {
         State.StateUpdate(_controller, this);
+        UpdateUI();
     }
     
     // Player FSM
@@ -65,5 +73,14 @@ public class PlayerView : MonoBehaviour
         {
             State.StateEnter(_controller, this);
         }
+    }
+    
+    // Updates all UI elements with values from the model
+    public void UpdateUI()
+    {
+        goldText.text = model.Gold.ToString() + "g";
+        protectionText.text = model.Protection.ToString();
+        toolsText.text = model.Tools.ToString();
+        foodText.text = model.Food.ToString();
     }
 }
