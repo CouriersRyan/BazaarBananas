@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DelaunatorSharp.Unity.Extensions;
 using UnityEngine;
+using UnityEngine.VFX;
 
 // The controller portion of the Player MVC
 // Mainly handles the player navigating the on screen map and receiving choices made from the event and market menus.
@@ -50,4 +51,20 @@ public class PlayerController
     {
         return model.pawn.position = Vector2.Lerp(model.lerpFrom, model.lerpTo, time);
     }
+    
+    // Set the selected node for the pawn to rotate to face.
+    public void SetLookAtTarget()
+    {
+        var faceVector = ((Vector2)model.pawn.position - model.lerpTo).normalized;
+        model.rotateAt = Quaternion.LookRotation(faceVector, Vector3.back);
+        model.rotateFrom = model.pawn.rotation;
+        model.elapsedTime = 0;
+    }
+    
+    // Lerp to rotate to face the next node.
+    public void FaceTarget(float time)
+    {
+        model.pawn.rotation = Quaternion.Slerp(model.rotateFrom, model.rotateAt, time);
+    }
+    
 }

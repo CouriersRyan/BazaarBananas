@@ -23,6 +23,8 @@ using UnityEngine;
     // For lerping the pawn.
     [NonSerialized] public Vector2 lerpTo;
     [NonSerialized] public Vector2 lerpFrom;
+    [NonSerialized] public Quaternion rotateFrom;
+    [NonSerialized] public Quaternion rotateAt;
     [NonSerialized] public float elapsedTime;
     [SerializeField] private float maxTime;
     public float LerpValue

@@ -4520,7 +4520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1173148933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4746,7 +4746,7 @@ MonoBehaviour:
   generationMinDistance: 1.4
   numOfPaths: 8
   edgeWidth: 0.05
-  edgeColor: {r: 0, g: 0, b: 0, a: 1}
+  edgeColor: {r: 1, g: 1, b: 1, a: 1}
   lineMaterial: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!4 &1228486623 stripped
 Transform:
