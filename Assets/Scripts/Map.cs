@@ -53,7 +53,7 @@ public class Map : MonoBehaviour
     
     
 
-    void Start()
+    void Awake()
     {
         GenerateMap();
         _startNode = FindSouthmostNode();

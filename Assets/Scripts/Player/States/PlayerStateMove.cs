@@ -16,7 +16,7 @@ public class PlayerStateMove : PlayerStateBase
         controller.MoveToTargetNode(controller.model.LerpValue);
         if (controller.model.LerpValue >= 1f)
         {
-            view.SetState(view.stateSelect);
+            view.SetState(view.stateEvent);
         }
         
     }
