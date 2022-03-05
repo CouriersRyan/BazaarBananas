@@ -674,6 +674,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 84108796}
+  - component: {fileID: 84108797}
   m_Layer: 5
   m_Name: Open Close
   m_TagString: Untagged
@@ -703,6 +704,20 @@ RectTransform:
   m_AnchoredPosition: {x: 886, y: 478}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &84108797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84108795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea8c325a74a3cc46a73a513bada51e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  open: {fileID: 1305389479}
+  close: {fileID: 1933287547}
 --- !u!4 &89714873 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4279449019447086, guid: eded051879df4c147b9010199d240258, type: 3}
@@ -2336,7 +2351,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 427493681}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1072997901}
+        m_TargetAssemblyTypeName: MenuField, Assembly-CSharp
+        m_MethodName: ConvertBackward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &427493681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2671,8 +2698,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4556,7 +4583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &820304510
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4846,7 +4873,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 887502720}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1072997900}
+        m_TargetAssemblyTypeName: MenuField, Assembly-CSharp
+        m_MethodName: ConvertBackward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &887502720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5496,7 +5535,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 973377974}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1072997900}
+        m_TargetAssemblyTypeName: MenuField, Assembly-CSharp
+        m_MethodName: ConvertForward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &973377974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5931,7 +5982,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1015143625}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1072997901}
+        m_TargetAssemblyTypeName: MenuField, Assembly-CSharp
+        m_MethodName: ConvertForward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1015143625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6062,6 +6125,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1072997899}
   - component: {fileID: 1072997898}
+  - component: {fileID: 1072997902}
+  - component: {fileID: 1072997901}
+  - component: {fileID: 1072997900}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -6081,8 +6147,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7680c9f6d1800ee4784fb3d7ddd8423d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marketMenu: {fileID: 0}
-  eventMenu: {fileID: 0}
+  m_OnEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OffEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  marketMenu: {fileID: 1950957450}
+  eventMenu: {fileID: 820304509}
 --- !u!4 &1072997899
 Transform:
   m_ObjectHideFlags: 0
@@ -6098,6 +6170,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1072997900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072997897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14ca09c6b2f5f446b61ac7d55f329be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourcesInField: 0000000003000000
+  resourceText0: {fileID: 1847491239}
+  resourceText1: {fileID: 2082666974}
+--- !u!114 &1072997901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072997897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14ca09c6b2f5f446b61ac7d55f329be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourcesInField: 0000000002000000
+  resourceText0: {fileID: 465562545}
+  resourceText1: {fileID: 1523344229}
+--- !u!114 &1072997902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072997897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d14ca09c6b2f5f446b61ac7d55f329be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourcesInField: 0000000001000000
+  resourceText0: {fileID: 1431731933}
+  resourceText1: {fileID: 1130152246}
 --- !u!4 &1073738897 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4279449019447086, guid: eded051879df4c147b9010199d240258, type: 3}
@@ -6424,9 +6541,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1562765357}
-        m_TargetAssemblyTypeName: PlayerView, Assembly-CSharp
-        m_MethodName: UpdateUI
+      - m_Target: {fileID: 1072997902}
+        m_TargetAssemblyTypeName: MenuField, Assembly-CSharp
+        m_MethodName: ConvertBackward
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6713,8 +6830,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6749,7 +6866,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 79.6778, y: -9.646219, z: 17.443132, w: -9.646219}
+  m_margin: {x: 79.6778, y: -9.646219, z: -12.473738, w: -9.646219}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7519,7 +7636,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1201155101}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1072997902}
+        m_TargetAssemblyTypeName: MenuField, Assembly-CSharp
+        m_MethodName: ConvertForward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1201155101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7971,7 +8100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1305389480
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8035,7 +8164,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1305389482}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 84108797}
+        m_TargetAssemblyTypeName: MenuOpenClose, Assembly-CSharp
+        m_MethodName: ToggleMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1305389482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8939,7 +9080,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1420487676}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1072997898}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: FinishEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1420487676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9224,8 +9377,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9470,8 +9623,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9506,7 +9659,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 79.6778, y: -9.646219, z: 17.443132, w: -9.646219}
+  m_margin: {x: 79.6778, y: -9.646219, z: -12.473738, w: -9.646219}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -11232,7 +11385,7 @@ GameObject:
   - component: {fileID: 1847491240}
   - component: {fileID: 1847491239}
   m_Layer: 5
-  m_Name: Gold Exchange 1
+  m_Name: Gold Exchange 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11305,8 +11458,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -11604,12 +11757,12 @@ GameObject:
   - component: {fileID: 1933287550}
   - component: {fileID: 1933287549}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Close
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1933287548
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11673,7 +11826,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1933287550}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 84108797}
+        m_TargetAssemblyTypeName: MenuOpenClose, Assembly-CSharp
+        m_MethodName: ToggleMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1933287550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11857,7 +12022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1950957451
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12443,8 +12608,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 232, y: -1}
-  m_SizeDelta: {x: 220.9, y: 50}
+  m_AnchoredPosition: {x: 251.35785, y: -1}
+  m_SizeDelta: {x: 259.616, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2082666974
 MonoBehaviour:
@@ -12493,8 +12658,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 70
+  m_fontSizeBase: 70
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
