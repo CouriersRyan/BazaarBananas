@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class MapNode : MonoBehaviour
 {
-    private EventMenu _eventMenu;
+    private EventGame _eventGame;
     private Market _market;
 
     public Market Market
     {
         get { return _market; }
     }
-    public EventMenu EventMenu
+    public EventGame EventGame
     {
-        get { return _eventMenu; }
+        get { return _eventGame; }
     }
 
     private bool _isMarket; // Whether the node is for a market or an event.
@@ -31,7 +31,7 @@ public class MapNode : MonoBehaviour
         _isMarket = node.isExcluded; // Make the node a market if it was excluded in the A Star search.
         if (node.GCost == 0) _isMarket = true; // First node is always a market.
         _market = gameObject.AddComponent<Market>();
-        _eventMenu = gameObject.AddComponent<EventMenu>();
+        _eventGame = gameObject.AddComponent<EventGame>();
     }
     
     // Set the Node that this MapNode is associated to.

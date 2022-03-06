@@ -29,7 +29,6 @@ public class Market : MonoBehaviour, ITradeResources
 
     public void RandomizeMarket()
     {
-        //TODO Implement
         resourceConversions[(int)TradeResources.Gold, (int)TradeResources.Protection] = Random.Range(5, 11);
         resourceConversions[(int)TradeResources.Gold, (int)TradeResources.Food] = Random.Range(5, 11);
         resourceConversions[(int)TradeResources.Gold, (int)TradeResources.Tools] = Random.Range(5, 11);

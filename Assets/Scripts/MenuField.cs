@@ -53,12 +53,12 @@ public class MenuField : MonoBehaviour
         }
     }
 
+    // Updates the text on the specifc UI elements this class has references to.
     public void UpdateUI()
     {
         node = player.GetCurrentNode().Obj.GetComponent<MapNode>();
         var value = node.Market.GetConversion(resourcesInField[0], resourcesInField[1]);
         resourceText0.text = value.ToString();
         resourceText1.text = "1";
-        Debug.Log("here");
     }
 }
