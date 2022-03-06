@@ -25,7 +25,7 @@ public class EventGame : MonoBehaviour
         //Default Random prompt.
         prompt = "You have encountered an event! Spend resources to try and get past it.";
 
-        var numChoices = Random.Range(0, eventChoices.Length);
+        var numChoices = Random.Range(2, eventChoices.Length + 1);
         
         
         for (int i = 0; i < eventChoices.Length; i++)

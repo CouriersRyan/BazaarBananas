@@ -136,6 +136,17 @@ public class PlayerView : MonoBehaviour
 
         return -1;
     }
+
+    // Check if the resources can be changed by a certain value and remain nonnegative.
+    public bool CheckResources(int goldDelta, int protectDelta, int toolsDelta, int foodDelta)
+    {
+        var isValid = true;
+        isValid = !(model.Gold < -goldDelta) && isValid;
+        isValid = !(model.Protection < -protectDelta) && isValid;
+        isValid = !(model.Tools < -toolsDelta) && isValid;
+        isValid = !(model.Food < -foodDelta) && isValid;
+        return isValid;
+    }
     
     // Returns the current node the player is on.
     public Node GetCurrentNode()
