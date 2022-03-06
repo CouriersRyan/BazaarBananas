@@ -19,12 +19,8 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private TMP_Text toolsText;
     [SerializeField] private TMP_Text foodText;
     
-    //TODO Player can choose which resources to spend at events. (State)
-    //     TODO Randomly generate resources needed to be spent and GUI.
-    //     TODO Use SOs to set up this random events.
-    //     TODO Maybe have a class for creating a generic event.
-    //TODO use event binding to have the player return from a menu.
-    
+    //TODO Use SOs to set up this random events.
+
     // States: Select node -> move -> event/merchant -> repeat
     
     void Start()
