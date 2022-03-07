@@ -23,6 +23,7 @@ public class MapNode : MonoBehaviour
         get { return _isMarket; }
     }
     
+
     private Node node;
 
     // Determines which nodes are markets and which ones are events.

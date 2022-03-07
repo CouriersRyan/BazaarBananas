@@ -174,7 +174,7 @@ public class Map : MonoBehaviour
         _trianglesContainer = new GameObject(nameof(_trianglesContainer)).transform;
     }
 
-    private Node FindSouthmostNode()
+    public Node FindSouthmostNode()
     {
         var southmostNode = _nodes[0];
         foreach (var node in _nodes)
@@ -188,7 +188,7 @@ public class Map : MonoBehaviour
         return southmostNode;
     }
     
-    private Node FindNorthmostNode()
+    public Node FindNorthmostNode()
     {
         var northmostNode = _nodes[0];
         foreach (var node in _nodes)
