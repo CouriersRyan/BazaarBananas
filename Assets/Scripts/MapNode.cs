@@ -29,10 +29,14 @@ public class MapNode : MonoBehaviour
     // Determines which nodes are markets and which ones are events.
     void Start()
     {
-        _isMarket = node.isExcluded; // Make the node a market if it was excluded in the A Star search.
+        if(node.isExcluded) _isMarket = (Random.Range(0f, 1f) > 0.667f); // A node has a chance to be a market if it was excluded in the A Star search.
         if (node.GCost == 0) _isMarket = true; // First node is always a market.
         _market = gameObject.AddComponent<Market>();
         _eventGame = gameObject.AddComponent<EventGame>();
+        if (_isMarket)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
+        }
     }
     
     // Set the Node that this MapNode is associated to.

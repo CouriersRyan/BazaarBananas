@@ -301,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 33121170}
   m_Layer: 5
-  m_Name: Field (5)
+  m_Name: Field 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,7 +325,7 @@ RectTransform:
   - {fileID: 399963700}
   - {fileID: 1225708344}
   m_Father: {fileID: 1386630920}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.141875, y: 0.5}
   m_AnchorMax: {x: 0.8645625, y: 0.6203781}
@@ -930,7 +930,7 @@ GameObject:
   - component: {fileID: 81973802}
   - component: {fileID: 81973801}
   m_Layer: 5
-  m_Name: Gold Exchange 1
+  m_Name: Banana Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1426,7 +1426,7 @@ GameObject:
   - component: {fileID: 117715633}
   - component: {fileID: 117715632}
   m_Layer: 5
-  m_Name: Gold Exchange 2
+  m_Name: Banana Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1801,7 +1801,7 @@ GameObject:
   - component: {fileID: 164898598}
   - component: {fileID: 164898597}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: Banana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2941,7 +2941,7 @@ GameObject:
   m_Component:
   - component: {fileID: 271827291}
   m_Layer: 5
-  m_Name: Field (4)
+  m_Name: Field 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2965,13 +2965,89 @@ RectTransform:
   - {fileID: 531683787}
   - {fileID: 898071335}
   m_Father: {fileID: 1386630920}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.141875, y: 0.5}
   m_AnchorMax: {x: 0.8645625, y: 0.6203781}
   m_AnchoredPosition: {x: 334.00006, y: -1.0000153}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &272451324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 272451325}
+  - component: {fileID: 272451327}
+  - component: {fileID: 272451326}
+  m_Layer: 5
+  m_Name: Banana
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &272451325
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272451324}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.9016, y: 1.9016, z: 1.9016}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1386630920}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 752, y: -94.00003}
+  m_SizeDelta: {x: 140, y: 140}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &272451326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272451324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: e128ac5fe46fd204b82a5c318d2546c3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &272451327
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272451324}
+  m_CullTransparentMesh: 1
 --- !u!4 &273547116 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4279449019447086, guid: eded051879df4c147b9010199d240258, type: 3}
@@ -4303,7 +4379,7 @@ GameObject:
   m_Component:
   - component: {fileID: 475425442}
   m_Layer: 5
-  m_Name: Field (3)
+  m_Name: Field 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4327,7 +4403,7 @@ RectTransform:
   - {fileID: 579874153}
   - {fileID: 69729793}
   m_Father: {fileID: 1386630920}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.141875, y: 0.5}
   m_AnchorMax: {x: 0.8645625, y: 0.6203781}
@@ -4470,7 +4546,7 @@ GameObject:
   - component: {fileID: 513180024}
   - component: {fileID: 513180023}
   m_Layer: 5
-  m_Name: Gold Exchange 3
+  m_Name: Banana Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5315,7 +5391,7 @@ GameObject:
   - component: {fileID: 563689310}
   - component: {fileID: 563689309}
   m_Layer: 5
-  m_Name: Food
+  m_Name: Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5391,7 +5467,7 @@ GameObject:
   - component: {fileID: 566132478}
   - component: {fileID: 566132477}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: Banana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6393,7 +6469,7 @@ GameObject:
   - component: {fileID: 675887607}
   - component: {fileID: 675887606}
   m_Layer: 5
-  m_Name: Gold Exchange 3
+  m_Name: Banana Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7620,6 +7696,141 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eded051879df4c147b9010199d240258, type: 3}
+--- !u!1 &878596265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 878596266}
+  - component: {fileID: 878596268}
+  - component: {fileID: 878596267}
+  m_Layer: 5
+  m_Name: Banana Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &878596266
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878596265}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.9016, y: 1.9016, z: 1.9016}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1386630920}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 48, y: -94}
+  m_SizeDelta: {x: 220.9, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &878596267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878596265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: XXX
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 70
+  m_fontSizeBase: 70
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 53.054096, y: -9.646219, z: 0.0000017224861, w: -9.646219}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &878596268
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878596265}
+  m_CullTransparentMesh: 1
 --- !u!1 &887502717
 GameObject:
   m_ObjectHideFlags: 0
@@ -9227,7 +9438,7 @@ GameObject:
   - component: {fileID: 1057942344}
   - component: {fileID: 1057942343}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: Banana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9335,8 +9546,19 @@ MonoBehaviour:
       m_Calls: []
   marketMenu: {fileID: 1950957450}
   eventMenu: {fileID: 820304509}
-  resultScreen: {fileID: 0}
-  GUI: {fileID: 0}
+  resultScreen: {fileID: 1386630919}
+  GUI: {fileID: 1141419687}
+  bananas:
+  - {fileID: 675887606}
+  - {fileID: 81973801}
+  - {fileID: 117715632}
+  - {fileID: 513180023}
+  - {fileID: 878596267}
+  resources:
+  - {fileID: 1449069106}
+  - {fileID: 579874154}
+  - {fileID: 531683788}
+  - {fileID: 399963701}
 --- !u!4 &1072997899
 Transform:
   m_ObjectHideFlags: 0
@@ -12312,7 +12534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1365540439}
   m_Layer: 5
-  m_Name: Field (6)
+  m_Name: Field 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12336,12 +12558,12 @@ RectTransform:
   - {fileID: 1449069105}
   - {fileID: 2034619387}
   m_Father: {fileID: 1386630920}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.141875, y: 0.5}
   m_AnchorMax: {x: 0.8645625, y: 0.6203781}
-  m_AnchoredPosition: {x: -446, y: 1}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -445.99997, y: 0.99993896}
+  m_SizeDelta: {x: 0.00012207031, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &1368913096 stripped
 Transform:
@@ -12440,7 +12662,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1386630920
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12456,10 +12678,12 @@ RectTransform:
   - {fileID: 216486208}
   - {fileID: 1286492019}
   - {fileID: 731815973}
+  - {fileID: 1365540439}
   - {fileID: 475425442}
   - {fileID: 271827291}
   - {fileID: 33121170}
-  - {fileID: 1365540439}
+  - {fileID: 272451325}
+  - {fileID: 878596266}
   m_Father: {fileID: 1173148936}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13491,7 +13715,7 @@ GameObject:
   - component: {fileID: 1449069107}
   - component: {fileID: 1449069106}
   m_Layer: 5
-  m_Name: Food Exchange 3
+  m_Name: Gold Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13514,7 +13738,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 251.35785, y: -1}
+  m_AnchoredPosition: {x: 251.3578, y: -1}
   m_SizeDelta: {x: 259.616, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1449069106
@@ -18448,7 +18672,7 @@ GameObject:
   - component: {fileID: 2135225607}
   - component: {fileID: 2135225606}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: Banana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

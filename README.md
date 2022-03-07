@@ -3,6 +3,8 @@ Midterm project for Intermediate Game Programming.
 This game is a procedurally generated merchant game, where the player plays as a travelling merchant, represented by a wagon. They must traverse a map of nodes to reach the end buy as many bananas as possible in the end.
 Each node can either be a market or an event. In a market, the player may freely buy and sell their resources in preparation for the next segment of the run.
 With an event, the player has a series of choices on how to spend resources to get past them and somethings gain.
+Markets are identified by cyan nodes and events by pink nodes. You must select a choice to move on.
+You can close the menu to look at the map, but you must open it again and either hit 'confirm' in the market or select a choice in the event.
 
 #Sources  
 [DelaunatorSharp](https://github.com/nol1fe/delaunator-sharp) Package by nol1fe is licensed under the MIT license.   
