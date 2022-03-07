@@ -48,6 +48,7 @@ public class EventMenu : MonoBehaviour
                 {
                     //Check if any value would go below zero from choosing this option and if none will, then allow
                     //the player to pick it.
+                    SoundManager.Instance.PlayButtonPressed();
                     if (player.CheckResources(eventGame.eventChoices[i1].Gold,
                             eventGame.eventChoices[i1].Protection, eventGame.eventChoices[i1].Tools,
                             eventGame.eventChoices[i1].Food))

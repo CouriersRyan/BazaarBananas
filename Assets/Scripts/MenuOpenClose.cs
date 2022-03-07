@@ -23,6 +23,7 @@ public class MenuOpenClose : MonoBehaviour
         GameManager.Instance.ToggleMenu();
         ToggleOpen();
         ToggleClose();
+        SoundManager.Instance.PlayButtonPressed();
     }
 
     //Toggles the button that would open the menu.
