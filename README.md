@@ -1,5 +1,6 @@
 # BazaarBananas
 Midterm project for Intermediate Game Programming.  
+The advanced coding technique I want to point out is using A Star Pathfinding to create a series of paths from the start to the end, as well as use of a Delaunay Triangulation library.
 This game is a procedurally generated merchant game, where the player plays as a travelling merchant, represented by a wagon. They must traverse a map of nodes to reach the end buy as many bananas as possible in the end.
 Each node can either be a market or an event. In a market, the player may freely buy and sell their resources in preparation for the next segment of the run.
 With an event, the player has a series of choices on how to spend resources to get past them and somethings gain.
@@ -8,7 +9,7 @@ You can close the menu to look at the map, but you must open it again and either
 
 #Sources  
 [DelaunatorSharp](https://github.com/nol1fe/delaunator-sharp) Package by nol1fe is licensed under the MIT license.   
-Documentation of [Delaunay Triangulation](https://github.com/mapbox/delaunator) and original project the above Package was adapted from Delaunator by mapbox which is licensed under the ISC license. 
+Documentation of [Delaunay Triangulation](https://en.wikipedia.org/wiki/Delaunay_triangulation) and original project the above Package was adapted from [Delaunator](https://github.com/mapbox/delaunator) by mapbox which is licensed under the ISC license. 
 Inspiration to use A* star with delaunay was inspired from a [project](https://github.com/yurkth/stsmapgen) by yurkth though no direct code was used.
 
 A* Pathfinding Implementation was done largely by myself, but the method was adopted from [A* Pathfinding in Unity](https://www.youtube.com/watch?v=alU04hvz6L4) by Code Monkey.
