@@ -32,10 +32,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Unity event from opening and closing an event or market, and ending the game.
     public UnityEvent m_OnEvent;
     public UnityEvent m_OffEvent;
     public UnityEvent m_EndGame;
     
+    // Defines the events and adds listeners from the Game Manager.
     private void Awake()
     {
         if (m_OnEvent == null)

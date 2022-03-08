@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Class that handles the UI for selecting choices in an event.
 public class EventMenu : MonoBehaviour
 {
     private static int fields = 4;
@@ -26,6 +24,7 @@ public class EventMenu : MonoBehaviour
         GameManager.Instance.m_OnEvent.AddListener(UpdateUI);
     }
 
+    // Updates the information on the UI based on the values of the current node the player is on.
     public void UpdateUI()
     {
 
@@ -65,7 +64,7 @@ public class EventMenu : MonoBehaviour
                 // Sets the main text.
                 mainTexts[i].text = eventGame.eventChoices[i].Text;
                 
-                // Set the subext to be the cost of resources taken.
+                // Set the subext to be the cost of resources taken. Logic for applying commas and periods in appropriate places.
                 var subText = "";
                 var hasPrevResource = false;
                 if (eventGame.eventChoices[i].Gold != 0)

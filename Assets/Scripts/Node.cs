@@ -6,6 +6,7 @@ using DelaunatorSharp;
 using UnityEngine;
 
 // Version of DelaunatorSharp's Point struct that is aware of its connections to other nodes/points.
+// Is a class instead of a struct because I want to be able to constantly change the values it contains.
 // In DelaunatorSharp
 // See README.md or Map.cs for more details on credits.
 public class Node : IPoint

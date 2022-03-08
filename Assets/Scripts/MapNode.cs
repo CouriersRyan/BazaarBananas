@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
+// Class for the objects instantiated to physically represent Nodes on the Map in the Scene.
 public class MapNode : MonoBehaviour
 {
+    // The two possible things the player can open on a nodd.
     private EventGame _eventGame;
     private Market _market;
 

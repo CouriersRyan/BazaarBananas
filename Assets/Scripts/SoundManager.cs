@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Singleton for playing sounds in the scenes.
 public class SoundManager : MonoBehaviour
 {
     // Singleton implementation, copied from Class 4 slides w/o implementation as a Generic
@@ -29,13 +30,12 @@ public class SoundManager : MonoBehaviour
     private AudioSource _source;
     [SerializeField] private AudioClip buttonPressedClip;
     
-    // Start is called before the first frame update
     void Start()
     {
         _source = GetComponent<AudioSource>();
     }
 
-    public void PlayButtonPressed()
+    public void PlayButtonPressed() // For playing audio when a button is pressed.
     {
         _source.PlayOneShot(buttonPressedClip);
     }

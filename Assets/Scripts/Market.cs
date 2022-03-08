@@ -2,15 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public enum TradeResources
-{
-    Gold = 0,
-    Protection = 1,
-    Tools = 2,
-    Food = 3
-}
-
+// Class used to determine the rate at which the player can sell and buy in a given market.
 public class Market : MonoBehaviour, ITradeResources
 {
     // Determines resources for trading with the player.
@@ -27,6 +19,8 @@ public class Market : MonoBehaviour, ITradeResources
         RandomizeMarket();
     }
 
+    
+    // Randomizes the rate at which resources can be converted to gold at this market.
     public void RandomizeMarket()
     {
         resourceConversions[(int)TradeResources.Gold, (int)TradeResources.Protection] = Random.Range(5, 11);
@@ -34,6 +28,9 @@ public class Market : MonoBehaviour, ITradeResources
         resourceConversions[(int)TradeResources.Gold, (int)TradeResources.Tools] = Random.Range(5, 11);
     }
 
+    // Get the conversions between two resources.
+    // Currently only used between gold and another resource. Theoretically, if I kept working on this, it would
+    // Allow for conversions between two of any resource.
     public int GetConversion(TradeResources resource0, TradeResources resource1)
     {
         return resourceConversions[(int)resource0, (int)resource1]; 

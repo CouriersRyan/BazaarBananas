@@ -18,11 +18,7 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private TMP_Text protectionText;
     [SerializeField] private TMP_Text toolsText;
     [SerializeField] private TMP_Text foodText;
-    
-    //TODO Use SOs to set up this random events.
 
-    // States: Select node -> move -> event/merchant -> repeat
-    
     void Start()
     {
         _controller = new PlayerController(model);

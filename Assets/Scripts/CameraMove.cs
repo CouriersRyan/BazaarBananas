@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Class that moves the camera.
 public class CameraMove : MonoBehaviour
 {
     [SerializeField] private Transform playerPawn;

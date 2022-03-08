@@ -11,8 +11,11 @@ public struct EventChoice : ITradeResources
     public int Tools { get; set; }
     public int Food { get; set; }
 
+    
+    // Should data in this current choice be pulled from.
     public bool isActiveChoice { get; set; }
     
+    // Constructor
     public EventChoice(string text, int gold, int protection, int tools, int food)
     {
         Text = text;
