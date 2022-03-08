@@ -6,6 +6,8 @@ Each node can either be a market or an event. In a market, the player may freely
 With an event, the player has a series of choices on how to spend resources to get past them and somethings gain.
 Markets are identified by cyan nodes and events by pink nodes. You must select a choice to move on.
 You can close the menu to look at the map, but you must open it again and either hit 'confirm' in the market or select a choice in the event.
+    
+*Project should be played in 16:9 aspect ratio. Other aspects will make the UI clip.
 
 # Sources  
 [DelaunatorSharp](https://github.com/nol1fe/delaunator-sharp) Package by nol1fe is licensed under the MIT license.   
