@@ -18,5 +18,5 @@ A* Pathfinding Implementation was done largely by myself, but the method was ado
 Icons, Background, and Sound: [Free 2D Mega Pack](https://assetstore.unity.com/packages/2d/free-2d-mega-pack-177430) from Brackeys, Unity Asset Store  
 Trees and Foliage: [Fantasy Forest Environment - Free Demo](https://assetstore.unity.com/packages/3d/environments/fantasy/fantasy-forest-environment-free-demo-35361) from Triforge Assets, Unity Asset Store  
 GUI: [Fantasy Wooden GUI : Free](https://assetstore.unity.com/packages/2d/gui/fantasy-wooden-gui-free-103811) from Black Hammer, Unity Asset Store  
-Player Wagon, Mountain, Rocks, and Wooden Structures: [RPG Poly Pack - Lite](https://assetstore.unity.com/packages/3d/environments/landscapes/rpg-poly-pack-lite-148410) from Gigel, Unity Asset Store
+Player Wagon, Mountain, Rocks, and Wooden Structures: [RPG Poly Pack - Lite](https://assetstore.unity.com/packages/3d/environments/landscapes/rpg-poly-pack-lite-148410) from Gigel, Unity Asset Store  
 Banana: Copyright: [stockunlimited](https://stock.pixlr.com/creator/stockunlimited)
