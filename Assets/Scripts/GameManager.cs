@@ -93,6 +93,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private TMP_Text[] bananas = new TMP_Text[5];
     [SerializeField] private TMP_Text[] resources = new TMP_Text[4];
+    
+    [SerializeField] public InventoryController inventoryController;
 
     //Open/Closes the current menu based on the node.
     public void ToggleMenu()
