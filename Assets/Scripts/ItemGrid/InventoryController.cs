@@ -7,14 +7,41 @@ using Random = UnityEngine.Random;
 
 public class InventoryController : MonoBehaviour
 {
-    [HideInInspector] public ItemGrid selectedItemGrid;
+    private ItemGrid _selectedItemGrid;
+    
+    public ItemGrid SelectedItemGrid
+    {
+        get
+        {
+            return _selectedItemGrid;
+        }
 
-    private InventoryItem _selectedItem;
-    private RectTransform _rectTransformOfSelectedItem;
+        set
+        {
+            _selectedItemGrid = value;
+            _highlight.AssignParent(value);
+        }
+    }
 
     [SerializeField] private List<ItemData> items;
     [SerializeField] private GameObject itemPrefab;
     [SerializeField] private Transform canvas;
+
+    private InventoryHighlight _highlight;
+
+
+    private InventoryItem _itemToHighlight;
+    private Vector2Int _oldPosition;
+    private InventoryItem _overlapItem;
+    private RectTransform _rectTransformOfSelectedItem;
+
+    private InventoryItem _selectedItem;
+
+    private void Awake()
+    {
+        _highlight = GetComponent<InventoryHighlight>();
+    }
+
     private void Update()
     {
         ItemIconDrag();
@@ -23,15 +50,18 @@ public class InventoryController : MonoBehaviour
         {
             CreateRandomItem();
         }
-        
-        if (selectedItemGrid == null)
+
+        if (SelectedItemGrid == null)
         {
+            _highlight.Show(false);
             return;
         }
 
+        HandleHighlight();
+
         if (Input.GetMouseButtonDown(0))
         {
-            var tileGridPos = selectedItemGrid.GetTileGridPosition(Input.mousePosition);
+            var tileGridPos = GetTileGridPos();
 
             if (_selectedItem == null)
             {
@@ -41,6 +71,55 @@ public class InventoryController : MonoBehaviour
             {
                 PlaceItem(tileGridPos);
             }
+        }
+    }
+
+    private Vector2Int GetTileGridPos()
+    {
+        Vector2 position = Input.mousePosition;
+
+        if (_selectedItem != null)
+        {
+            position.x -= (_selectedItem.itemData.width - 1) * ItemGrid.TileSizeWidth / 2;
+            position.y += (_selectedItem.itemData.height - 1) * ItemGrid.TileSizeHeight / 2;
+        }
+
+        return SelectedItemGrid.GetTileGridPosition(position);
+    }
+
+    
+    private void HandleHighlight()
+    {
+        Vector2Int positionOnGrid = GetTileGridPos();
+
+        if (_oldPosition == positionOnGrid)
+        {
+            return;
+        }
+        
+        _oldPosition = positionOnGrid;
+
+        if (_selectedItem == null)
+        {
+            _itemToHighlight = SelectedItemGrid.GetItem(positionOnGrid.x, positionOnGrid.y);
+
+            if (_itemToHighlight != null)
+            {
+                _highlight.Show(true);
+                _highlight.SetSize(_itemToHighlight);
+                _highlight.SetPosition(SelectedItemGrid, _itemToHighlight);
+            }
+            else
+            {
+                _highlight.Show(false);
+            }
+        }
+        else
+        {
+            _highlight.Show(SelectedItemGrid.BoundaryCheck(positionOnGrid.x, positionOnGrid.y,
+                _selectedItem.itemData.width, _selectedItem.itemData.height));
+            _highlight.SetSize(_selectedItem);
+            _highlight.SetPosition(SelectedItemGrid, _selectedItem, positionOnGrid.x, positionOnGrid.y);
         }
     }
 
@@ -59,13 +138,22 @@ public class InventoryController : MonoBehaviour
 
     private void PlaceItem(Vector2Int tileGridPos)
     {
-        bool success = selectedItemGrid.PlaceItem(_selectedItem, tileGridPos.x, tileGridPos.y);
-        if(success) _selectedItem = null;
+        bool success = SelectedItemGrid.PlaceItem(_selectedItem, tileGridPos.x, tileGridPos.y, ref _overlapItem);
+        if (success)
+        {
+            _selectedItem = null;
+            if (_overlapItem != null)
+            {
+                _selectedItem = _overlapItem;
+                _overlapItem = null;
+                _rectTransformOfSelectedItem = _selectedItem.RectTransform;
+            }
+        }
     }
 
     private void PickUpItem(Vector2Int tileGridPos)
     {
-        _selectedItem = selectedItemGrid.PickUpItem(tileGridPos.x, tileGridPos.y);
+        _selectedItem = SelectedItemGrid.PickUpItem(tileGridPos.x, tileGridPos.y);
         if (_selectedItem != null)
         {
             _rectTransformOfSelectedItem = _selectedItem.RectTransform;
