@@ -8,8 +8,40 @@ public class InventoryItem : MonoBehaviour
 {
     public ItemData itemData;
 
+    public int Height
+    {
+        get
+        {
+            if (rotated)
+            {
+                return itemData.width;
+            }
+            else
+            {
+                return itemData.height;
+            }
+        }
+    }
+
+    public int Width
+    {
+        get
+        {
+            if (rotated)
+            {
+                return itemData.height;
+            }
+            else
+            {
+                return itemData.width;
+            }
+        }
+    }
+    
     public int onGridPosX;
     public int onGridPosY;
+
+    public bool rotated = false;
 
     private RectTransform _rectTransform;
     public RectTransform RectTransform
@@ -43,5 +75,12 @@ public class InventoryItem : MonoBehaviour
         size.x = itemData.width * ItemGrid.TileSizeWidth;
         size.y = itemData.height * ItemGrid.TileSizeHeight;
         _rectTransform.sizeDelta = size;
+    }
+
+    public void Rotate()
+    {
+        rotated = !rotated;
+
+        RectTransform.rotation = Quaternion.Euler(0, 0, rotated ? 90f : 0f);
     }
 }

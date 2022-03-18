@@ -46,9 +46,19 @@ public class InventoryController : MonoBehaviour
     {
         ItemIconDrag();
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && _selectedItem == null)
         {
             CreateRandomItem();
+        }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            InsertRandomItem();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            RotateItem();
         }
 
         if (SelectedItemGrid == null)
@@ -74,14 +84,24 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    private void RotateItem()
+    {
+        if (_selectedItem == null)
+        {
+            return;
+        }
+
+        _selectedItem.Rotate();
+    }
+
     private Vector2Int GetTileGridPos()
     {
         Vector2 position = Input.mousePosition;
 
         if (_selectedItem != null)
         {
-            position.x -= (_selectedItem.itemData.width - 1) * ItemGrid.TileSizeWidth / 2;
-            position.y += (_selectedItem.itemData.height - 1) * ItemGrid.TileSizeHeight / 2;
+            position.x -= (_selectedItem.Width - 1) * ItemGrid.TileSizeWidth / 2;
+            position.y += (_selectedItem.Height - 1) * ItemGrid.TileSizeHeight / 2;
         }
 
         return SelectedItemGrid.GetTileGridPosition(position);
@@ -117,10 +137,24 @@ public class InventoryController : MonoBehaviour
         else
         {
             _highlight.Show(SelectedItemGrid.BoundaryCheck(positionOnGrid.x, positionOnGrid.y,
-                _selectedItem.itemData.width, _selectedItem.itemData.height));
+                _selectedItem.Width, _selectedItem.Height));
             _highlight.SetSize(_selectedItem);
             _highlight.SetPosition(SelectedItemGrid, _selectedItem, positionOnGrid.x, positionOnGrid.y);
         }
+    }
+    
+    private void InsertRandomItem()
+    {
+        if (_selectedItemGrid == null)
+        {
+            return;
+            
+        }
+        
+        CreateRandomItem();
+        InventoryItem itemToInsert = _selectedItem;
+        _selectedItem = null;
+        InsertItem(itemToInsert, _selectedItemGrid);
     }
 
     public void CreateRandomItem()
@@ -135,7 +169,20 @@ public class InventoryController : MonoBehaviour
         int selectedItemID = Random.Range(0, items.Count);
         inventoryItem.Set(items[selectedItemID]);
     }
+    
+    private void InsertItem(InventoryItem itemToInsert, ItemGrid itemGrid)
+    {
 
+        Vector2Int? posOnGrid = itemGrid.FindSpaceForItem(itemToInsert);
+
+        if (posOnGrid == null)
+        {
+            return; 
+        }
+
+        itemGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
+    }
+    
     private void PlaceItem(Vector2Int tileGridPos)
     {
         bool success = SelectedItemGrid.PlaceItem(_selectedItem, tileGridPos.x, tileGridPos.y, ref _overlapItem);
@@ -147,6 +194,7 @@ public class InventoryController : MonoBehaviour
                 _selectedItem = _overlapItem;
                 _overlapItem = null;
                 _rectTransformOfSelectedItem = _selectedItem.RectTransform;
+                _rectTransformOfSelectedItem.SetAsLastSibling();
             }
         }
     }
@@ -157,6 +205,7 @@ public class InventoryController : MonoBehaviour
         if (_selectedItem != null)
         {
             _rectTransformOfSelectedItem = _selectedItem.RectTransform;
+            _rectTransformOfSelectedItem.SetAsLastSibling();
         }
     }
 
