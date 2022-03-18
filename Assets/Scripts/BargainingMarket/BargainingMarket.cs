@@ -42,15 +42,38 @@ public class BargainingMarket : MonoBehaviour, ITradeResources
 
     public TradeItem CreateItem()
     {
+        var resources = CalculateNewItem();
+
+        var emptyItem = new GameObject();
+        var marketItem = emptyItem.AddComponent<TradeItem>();
+        marketItem.SetTradeItem(resources[0], resources[1], resources[2], resources[3]);
+        SetItemValue(marketItem);
+
+        return marketItem;
+    }
+    
+    public TradeItem CreateItem(GameObject item)
+    {
+        var resources = CalculateNewItem();
+
+        var marketItem = item.AddComponent<TradeItem>();
+        marketItem.SetTradeItem(resources[0], resources[1], resources[2], resources[3]);
+        SetItemValue(marketItem);
+
+        return marketItem;
+    }
+
+    private int[] CalculateNewItem()
+    {
         int[] resources = new int[4];
-        
+
         //Choose primary
         var primary = _itemRandom.GetRandomIndex();
-        
+
         //Check if it will have secondary, or tertiary, etc.
         var isSecondary = Random.Range(0f, 1f) < _secondaryChance;
         var isTertiary = false;
-        if(isSecondary) isTertiary = Random.Range(0f, 1f) < _tertiaryChance;
+        if (isSecondary) isTertiary = Random.Range(0f, 1f) < _tertiaryChance;
 
         //Calculate a size.
         int size = Random.Range(0, 12) + 1;
@@ -85,10 +108,7 @@ public class BargainingMarket : MonoBehaviour, ITradeResources
             }
         }
 
-        var item = new TradeItem(resources[0], resources[1], resources[2], resources[3]);
-        SetItemValue(item);
-
-        return item;
+        return resources;
     }
 
     public void SetItemValue(TradeItem item)

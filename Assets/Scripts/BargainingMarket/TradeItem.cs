@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TradeItem : ITradeResources
+public class TradeItem : MonoBehaviour, ITradeResources
 {
 
-    public TradeItem(int gold, int protection, int tools, int food)
+    public void SetTradeItem(int gold, int protection, int tools, int food)
     {
         Gold = gold;
         Protection = protection;
