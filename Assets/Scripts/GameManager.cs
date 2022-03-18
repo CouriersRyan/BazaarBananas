@@ -59,6 +59,9 @@ public class GameManager : MonoBehaviour
         }
         m_EndGame.AddListener(DisplayResults);
         m_EndGame.AddListener(CalculateScore);
+
+        marketCamera.enabled = true;
+        overviewCamera.enabled = false;
     }
 
     private Map _map; //Reference to the map in the scene.
@@ -157,5 +160,14 @@ public class GameManager : MonoBehaviour
     public void ReturnToMainMenu()
     {
         SceneManager.LoadScene("StartScene");
+    }
+
+    [SerializeField] private Camera overviewCamera;
+    [SerializeField] private Camera marketCamera;
+
+    public void SetCamera(Camera camera)
+    {
+        overviewCamera.enabled = !overviewCamera.enabled;
+        marketCamera.enabled = !marketCamera.enabled;
     }
 }

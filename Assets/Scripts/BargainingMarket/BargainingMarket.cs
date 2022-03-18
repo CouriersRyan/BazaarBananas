@@ -9,7 +9,6 @@ public class BargainingMarket : MonoBehaviour, ITradeResources
 {
     //TODO: have items on screen to represent the list of market items. Should be able to click on them to buy and sell.
     //TODO: hover over to get info.
-    //TODO: implement grid based inventory.
     private static readonly float[] WeightCurve = { 0.01f, 0.1f, 1, 1, 2, 3, 3, 2, 1, 1, 0.5f, 0.02f };
     private readonly WeightedRandom _scarcityRandom = new WeightedRandom(WeightCurve);
 

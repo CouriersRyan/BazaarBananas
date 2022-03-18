@@ -53,7 +53,7 @@ public class InventoryController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            InsertRandomItem();
+            InsertRandomItem(_selectedItemGrid);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -143,7 +143,7 @@ public class InventoryController : MonoBehaviour
         }
     }
     
-    private void InsertRandomItem()
+    private void InsertRandomItem(ItemGrid grid)
     {
         if (_selectedItemGrid == null)
         {
@@ -154,7 +154,7 @@ public class InventoryController : MonoBehaviour
         CreateRandomItem();
         InventoryItem itemToInsert = _selectedItem;
         _selectedItem = null;
-        InsertItem(itemToInsert, _selectedItemGrid);
+        InsertItem(itemToInsert, grid);
     }
 
     public void CreateRandomItem()
@@ -194,6 +194,7 @@ public class InventoryController : MonoBehaviour
                 _selectedItem = _overlapItem;
                 _overlapItem = null;
                 _rectTransformOfSelectedItem = _selectedItem.RectTransform;
+                _rectTransformOfSelectedItem.SetParent(_rectTransformOfSelectedItem.parent.parent);
                 _rectTransformOfSelectedItem.SetAsLastSibling();
             }
         }
@@ -205,6 +206,7 @@ public class InventoryController : MonoBehaviour
         if (_selectedItem != null)
         {
             _rectTransformOfSelectedItem = _selectedItem.RectTransform;
+            _rectTransformOfSelectedItem.SetParent(_rectTransformOfSelectedItem.parent.parent);
             _rectTransformOfSelectedItem.SetAsLastSibling();
         }
     }

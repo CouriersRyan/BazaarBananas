@@ -8,9 +8,9 @@ public class MapNode : MonoBehaviour
 {
     // The two possible things the player can open on a nodd.
     private EventGame _eventGame;
-    private Market _market;
+    private BargainingMarket _market;
 
-    public Market Market
+    public BargainingMarket Market
     {
         get { return _market; }
     }
@@ -33,7 +33,7 @@ public class MapNode : MonoBehaviour
     {
         if(node.isExcluded) _isMarket = (Random.Range(0f, 1f) > 0.667f); // A node has a chance to be a market if it was excluded in the A Star search.
         if (node.GCost == 0) _isMarket = true; // First node is always a market.
-        _market = gameObject.AddComponent<Market>();
+        _market = gameObject.AddComponent<BargainingMarket>();
         _eventGame = gameObject.AddComponent<EventGame>();
         if (_isMarket)
         {

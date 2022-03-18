@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ItemGrid : MonoBehaviour
 {
-    public const float TileSizeWidth = 50f;
-    public const float TileSizeHeight = 50f;
+    public const float TileSizeWidth = 100f;
+    public const float TileSizeHeight = 100f;
 
     private InventoryItem[,] _inventoryItemSlots;
 
@@ -59,7 +59,7 @@ public class ItemGrid : MonoBehaviour
 
         if (overlapItem != null)
         {
-            ClearGrid(overlapItem);
+            CleanItemFromGrid(overlapItem);
         }
 
         PlaceItem(inventoryItem, posX, posY);
@@ -144,12 +144,12 @@ public class ItemGrid : MonoBehaviour
 
         if (toReturn == null) return null;
 
-        ClearGrid(toReturn);
+        CleanItemFromGrid(toReturn);
 
         return toReturn;
     }
 
-    private void ClearGrid(InventoryItem cleanItem)
+    private void CleanItemFromGrid(InventoryItem cleanItem)
     {
         for (int x = 0; x < cleanItem.Width; x++)
         {
@@ -158,6 +158,11 @@ public class ItemGrid : MonoBehaviour
                 _inventoryItemSlots[cleanItem.onGridPosX + x, cleanItem.onGridPosY + y] = null;
             }
         }
+    }
+
+    public void ClearGrid()
+    {
+        _inventoryItemSlots = new InventoryItem[gridSizeWidth, gridSizeHeight];
     }
 
     public bool PositionCheck(int posX, int posY)

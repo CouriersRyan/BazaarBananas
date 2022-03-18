@@ -15,9 +15,6 @@ public class PlayerView : MonoBehaviour
     
     // UI References
     [SerializeField] private TMP_Text goldText;
-    [SerializeField] private TMP_Text protectionText;
-    [SerializeField] private TMP_Text toolsText;
-    [SerializeField] private TMP_Text foodText;
 
     void Start()
     {
@@ -80,9 +77,6 @@ public class PlayerView : MonoBehaviour
     public void UpdateUI()
     {
         goldText.text = model.Gold.ToString() + "g";
-        protectionText.text = model.Protection.ToString();
-        toolsText.text = model.Tools.ToString();
-        foodText.text = model.Food.ToString();
     }
     
     // Changes values of a designated trade resource.
@@ -92,18 +86,6 @@ public class PlayerView : MonoBehaviour
         {
             case TradeResources.Gold:
                 model.Gold += value;
-                break;
-            
-            case TradeResources.Food:
-                model.Food += value;
-                break;
-            
-            case TradeResources.Protection:
-                model.Protection += value;
-                break;
-            
-            case TradeResources.Tools:
-                model.Tools += value;
                 break;
         }
     }
@@ -115,15 +97,6 @@ public class PlayerView : MonoBehaviour
         {
             case TradeResources.Gold:
                 return model.Gold;
-
-            case TradeResources.Food:
-                return model.Food;
-
-            case TradeResources.Protection:
-                return model.Protection;
-
-            case TradeResources.Tools:
-                return model.Tools;
         }
 
         return -1;
@@ -134,9 +107,6 @@ public class PlayerView : MonoBehaviour
     {
         var isValid = true;
         isValid = !(model.Gold < -goldDelta) && isValid;
-        isValid = !(model.Protection < -protectDelta) && isValid;
-        isValid = !(model.Tools < -toolsDelta) && isValid;
-        isValid = !(model.Food < -foodDelta) && isValid;
         return isValid;
     }
     
