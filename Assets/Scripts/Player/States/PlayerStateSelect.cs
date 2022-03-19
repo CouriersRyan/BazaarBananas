@@ -12,7 +12,7 @@ public class PlayerStateSelect : PlayerStateBase
 
     public override void StateUpdate(PlayerController controller, PlayerView view)
     {
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(0))
         {
             // Copied from Match3-FSM assignment
             // Send an imaginary ray into the screen at the position of the mouse click and return the object that is located there.

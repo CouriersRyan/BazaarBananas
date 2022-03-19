@@ -9,16 +9,22 @@ public class BargainingMarket : MonoBehaviour, ITradeResources
 {
     //TODO: have items on screen to represent the list of market items. Should be able to click on them to buy and sell.
     //TODO: hover over to get info.
-    private static readonly float[] WeightCurve = { 0.01f, 0.1f, 1, 1, 2, 3, 3, 2, 1, 1, 0.5f, 0.02f };
+    private static readonly float[] WeightCurve = {0.1f, 1, 1, 2, 3, 3, 2, 1, 1, 0.5f};
     private readonly WeightedRandom _scarcityRandom = new WeightedRandom(WeightCurve);
 
     private WeightedRandom _itemRandom;
     private float _secondaryChance = 0.5f;
     private float _tertiaryChance = 0.6f;
 
-    private int _marketSize = 3;
+    private int _marketDefaultCount = 3;
 
-    public List<TradeItem> ItemInMarket = new List<TradeItem>();
+    public int MarketDefaultCount
+    {
+        get
+        {
+            return _marketDefaultCount;
+        }
+    }
 
     private void Awake()
     {
@@ -30,14 +36,6 @@ public class BargainingMarket : MonoBehaviour, ITradeResources
 
         float[] temp = { gold, protection, tools, food };
         _itemRandom = new WeightedRandom(temp);
-        
-        int i = 0;
-        while (i < _marketSize)
-        {
-            ItemInMarket.Add(CreateItem());
-            i++;
-        }
-
     }
 
     public TradeItem CreateItem()

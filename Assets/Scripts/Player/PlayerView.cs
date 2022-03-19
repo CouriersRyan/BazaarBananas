@@ -80,18 +80,13 @@ public class PlayerView : MonoBehaviour
     }
     
     // Changes values of a designated trade resource.
-    public void ChangeResource(TradeResources resource, int value)
+    public void ChangeGold(int value)
     {
-        switch (resource)
-        {
-            case TradeResources.Gold:
-                model.Gold += value;
-                break;
-        }
+        model.Gold += value;
     }
     
     // Returns the value of a resource.
-    public int GetResource(TradeResources resource)
+    public int GetGold(TradeResources resource)
     {
         switch (resource)
         {
@@ -103,7 +98,7 @@ public class PlayerView : MonoBehaviour
     }
 
     // Check if the resources can be changed by a certain value and remain nonnegative.
-    public bool CheckResources(int goldDelta, int protectDelta, int toolsDelta, int foodDelta)
+    public bool CheckGold(int goldDelta)
     {
         var isValid = true;
         isValid = !(model.Gold < -goldDelta) && isValid;

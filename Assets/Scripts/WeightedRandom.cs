@@ -24,8 +24,8 @@ public class WeightedRandom
 
         for (int i = 0; i < _weightDistribution.Length; i++)
         {
-            totalWeight -= _weightDistribution[i];
-            if (totalWeight <= 0)
+            target -= _weightDistribution[i];
+            if (target <= 0)
             {
                 return i;
             }

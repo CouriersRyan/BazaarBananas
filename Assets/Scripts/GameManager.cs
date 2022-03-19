@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
             m_OffEvent = new UnityEvent();
         }
         m_OffEvent.AddListener(ToggleMenu);
-        
+
         if (m_EndGame == null)
         {
             m_EndGame = new UnityEvent();
@@ -60,8 +60,8 @@ public class GameManager : MonoBehaviour
         m_EndGame.AddListener(DisplayResults);
         m_EndGame.AddListener(CalculateScore);
 
-        marketCamera.enabled = true;
-        overviewCamera.enabled = false;
+        marketCamera.enabled = false;
+        overviewCamera.enabled = true;
     }
 
     private Map _map; //Reference to the map in the scene.
@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
 
     // References to the menus the player will be interacting with in the game.
     [SerializeField] private GameObject marketMenu;
+    [SerializeField] private GameObject inventoryMenu;
     [SerializeField] private GameObject eventMenu;
     [SerializeField] private GameObject resultScreen;
     [SerializeField] private GameObject GUI;
@@ -105,6 +106,8 @@ public class GameManager : MonoBehaviour
         if (GetPlayer().GetCurrentNode().Obj.GetComponent<MapNode>().IsMarket)
         {
             marketMenu.SetActive(!marketMenu.activeInHierarchy);
+            inventoryMenu.SetActive(!inventoryMenu.activeInHierarchy);
+            SwitchCamera();
         }
         else
         {
@@ -125,18 +128,18 @@ public class GameManager : MonoBehaviour
     //Calculates the score and set it on the end screen.
     public void CalculateScore()
     {
-        _player.GetResource(TradeResources.Gold);
-        _player.GetResource(TradeResources.Protection);
-        _player.GetResource(TradeResources.Tools);
-        _player.GetResource(TradeResources.Food);
+        _player.GetGold(TradeResources.Gold);
+        _player.GetGold(TradeResources.Protection);
+        _player.GetGold(TradeResources.Tools);
+        _player.GetGold(TradeResources.Food);
 
         var total = 0;
         
         for (int i = 0; i < resources.Length; i++)
         {
-            bananas[i].text = _player.GetResource((TradeResources)i).ToString();
-            resources[i].text = _player.GetResource((TradeResources)i).ToString();
-            total += _player.GetResource((TradeResources)i);
+            bananas[i].text = _player.GetGold((TradeResources)i).ToString();
+            resources[i].text = _player.GetGold((TradeResources)i).ToString();
+            total += _player.GetGold((TradeResources)i);
         }
 
         bananas[^1].text = total.ToString();
@@ -165,7 +168,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera overviewCamera;
     [SerializeField] private Camera marketCamera;
 
-    public void SetCamera(Camera camera)
+    public void SwitchCamera()
     {
         overviewCamera.enabled = !overviewCamera.enabled;
         marketCamera.enabled = !marketCamera.enabled;

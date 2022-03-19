@@ -48,15 +48,13 @@ public class EventMenu : MonoBehaviour
                     //Check if any value would go below zero from choosing this option and if none will, then allow
                     //the player to pick it.
                     SoundManager.Instance.PlayButtonPressed();
-                    if (player.CheckResources(eventGame.eventChoices[i1].Gold,
-                            eventGame.eventChoices[i1].Protection, eventGame.eventChoices[i1].Tools,
-                            eventGame.eventChoices[i1].Food))
+                    if (player.CheckGold(eventGame.eventChoices[i1].Gold))
                     {
-                        // Changes resources by the values in the choice.
-                        player.ChangeResource(TradeResources.Gold, eventGame.eventChoices[i1].Gold);
-                        player.ChangeResource(TradeResources.Protection, eventGame.eventChoices[i1].Protection);
-                        player.ChangeResource(TradeResources.Tools, eventGame.eventChoices[i1].Tools);
-                        player.ChangeResource(TradeResources.Food, eventGame.eventChoices[i1].Food);
+                        // Changes resources by the values in the choice. TODO: Fix this for new feature.
+                        /*player.ChangeGold(TradeResources.Gold, eventGame.eventChoices[i1].Gold);
+                        player.ChangeGold(TradeResources.Protection, eventGame.eventChoices[i1].Protection);
+                        player.ChangeGold(TradeResources.Tools, eventGame.eventChoices[i1].Tools);
+                        player.ChangeGold(TradeResources.Food, eventGame.eventChoices[i1].Food);*/
                         GameManager.Instance.FinishEvent(); // End the event once a choice has been made.
                     }
                 });

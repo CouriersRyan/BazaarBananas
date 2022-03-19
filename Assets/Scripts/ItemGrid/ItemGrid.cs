@@ -15,7 +15,7 @@ public class ItemGrid : MonoBehaviour
     [SerializeField] private int gridSizeWidth = 8;
     [SerializeField] private int gridSizeHeight = 5;
 
-    void Start()
+    void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
         InitGrid(gridSizeWidth, gridSizeHeight);
@@ -162,6 +162,11 @@ public class ItemGrid : MonoBehaviour
 
     public void ClearGrid()
     {
+        var items = gameObject.GetComponentsInChildren<InventoryItem>();
+        foreach (InventoryItem item in items)
+        {
+            Destroy(item.gameObject); //TODO Object Pooling.
+        }
         _inventoryItemSlots = new InventoryItem[gridSizeWidth, gridSizeHeight];
     }
 

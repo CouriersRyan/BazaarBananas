@@ -37,6 +37,14 @@ public class InventoryController : MonoBehaviour
 
     private InventoryItem _selectedItem;
 
+    public InventoryItem SelectedItem
+    {
+        get { return _selectedItem; }
+    }
+    
+    private InventoryItem _createdItem;
+    private RectTransform _createdItemRectTransform;
+
     private void Awake()
     {
         _highlight = GetComponent<InventoryHighlight>();
@@ -45,41 +53,61 @@ public class InventoryController : MonoBehaviour
     private void Update()
     {
         ItemIconDrag();
-
-        if (Input.GetKeyDown(KeyCode.Q) && _selectedItem == null)
-        {
-            CreateRandomItem();
-        }
-
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            InsertRandomItem(_selectedItemGrid);
-        }
-
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
             RotateItem();
         }
 
+        HandleHighlight();
+    }
+
+    private bool IsGridSelected()
+    {
         if (SelectedItemGrid == null)
         {
             _highlight.Show(false);
-            return;
+            return true;
         }
 
-        HandleHighlight();
+        return false;
+    }
 
-        if (Input.GetMouseButtonDown(0))
+    public void PickUpPlaceItem()
+    {
+        if (IsGridSelected()) return;
+        
+        var tileGridPos = GetTileGridPos();
+
+        if (_selectedItem == null)
         {
-            var tileGridPos = GetTileGridPos();
+            PickUpItem(tileGridPos);
+        }
+        else
+        {
+            PlaceItem(tileGridPos);
+        }
+    }
+    
+    public void PickUpPlaceItem(Action onPickUp, Action<InventoryItem> onPlace)
+    {
+        if (IsGridSelected()) return;
+        
+        var tileGridPos = GetTileGridPos();
 
-            if (_selectedItem == null)
+        if (_selectedItem == null)
+        {
+            if (PickUpItem(tileGridPos))
             {
-                PickUpItem(tileGridPos);
+                onPickUp();
             }
-            else
+        }
+        else
+        {
+            var placedItem = _selectedItem;
+            if (PlaceItem(tileGridPos))
             {
-                PlaceItem(tileGridPos);
+                onPlace(placedItem);
             }
         }
     }
@@ -110,6 +138,8 @@ public class InventoryController : MonoBehaviour
     
     private void HandleHighlight()
     {
+        if (IsGridSelected()) return;
+        
         Vector2Int positionOnGrid = GetTileGridPos();
 
         if (_oldPosition == positionOnGrid)
@@ -145,26 +175,31 @@ public class InventoryController : MonoBehaviour
     
     private void InsertRandomItem(ItemGrid grid)
     {
-        if (_selectedItemGrid == null)
-        {
-            return;
-            
-        }
-        
-        CreateRandomItem();
-        InventoryItem itemToInsert = _selectedItem;
-        _selectedItem = null;
-        InsertItem(itemToInsert, grid);
+        InsertRandomItem(grid, itemPrefab);
     }
 
-    public void CreateRandomItem()
+    public GameObject InsertRandomItem(ItemGrid grid, GameObject prefab)
     {
-        InventoryItem inventoryItem = Instantiate(itemPrefab).GetComponent<InventoryItem>();
+        if (grid == null)
+        {
+            return null;
+        }
+        
+        CreateRandomItem(prefab);
+        InventoryItem itemToInsert = _createdItem;
+        _createdItem = null;
+        InsertItem(itemToInsert, grid);
+        return itemToInsert.gameObject;
+    }
+
+    private void CreateRandomItem(GameObject prefab)
+    {
+        InventoryItem inventoryItem = Instantiate(prefab).GetComponent<InventoryItem>();
         var rectTransform = inventoryItem.RectTransform;
         rectTransform.SetParent(canvas);
 
-        _selectedItem = inventoryItem;
-        _rectTransformOfSelectedItem = rectTransform;
+        _createdItem = inventoryItem;
+        _createdItemRectTransform = rectTransform;
 
         int selectedItemID = Random.Range(0, items.Count);
         inventoryItem.Set(items[selectedItemID]);
@@ -183,7 +218,7 @@ public class InventoryController : MonoBehaviour
         itemGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
     }
     
-    private void PlaceItem(Vector2Int tileGridPos)
+    private bool PlaceItem(Vector2Int tileGridPos)
     {
         bool success = SelectedItemGrid.PlaceItem(_selectedItem, tileGridPos.x, tileGridPos.y, ref _overlapItem);
         if (success)
@@ -197,10 +232,14 @@ public class InventoryController : MonoBehaviour
                 _rectTransformOfSelectedItem.SetParent(_rectTransformOfSelectedItem.parent.parent);
                 _rectTransformOfSelectedItem.SetAsLastSibling();
             }
+
+            return true;
         }
+
+        return false;
     }
 
-    private void PickUpItem(Vector2Int tileGridPos)
+    private bool PickUpItem(Vector2Int tileGridPos)
     {
         _selectedItem = SelectedItemGrid.PickUpItem(tileGridPos.x, tileGridPos.y);
         if (_selectedItem != null)
@@ -208,7 +247,10 @@ public class InventoryController : MonoBehaviour
             _rectTransformOfSelectedItem = _selectedItem.RectTransform;
             _rectTransformOfSelectedItem.SetParent(_rectTransformOfSelectedItem.parent.parent);
             _rectTransformOfSelectedItem.SetAsLastSibling();
+            return true;
         }
+
+        return false;
     }
 
     private void ItemIconDrag()
