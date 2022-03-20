@@ -10,10 +10,11 @@ public class ItemData : ScriptableObject
 
     public Sprite itemIcon;
 
-    public int value;
+    public int value = -1;
 
-    public int gold;
-    public int protection;
-    public int tools;
-    public int food;
+    [Header("Min/Max values inclusive")]
+    public Vector2Int gold;
+    public Vector2Int protection;
+    public Vector2Int tools;
+    public Vector2Int food;
 }

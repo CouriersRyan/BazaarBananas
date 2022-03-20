@@ -96,7 +96,7 @@ public class ItemGrid : MonoBehaviour
         return position;
     }
 
-    private bool OverlapCheck(int posX, int posY, int width, int height, ref InventoryItem overlapItem)
+    public bool OverlapCheck(int posX, int posY, int width, int height, ref InventoryItem overlapItem)
     {
         for (int x = 0; x < width; x++)
         {
@@ -177,7 +177,7 @@ public class ItemGrid : MonoBehaviour
             return false;
         }
 
-        if (posX >= gridSizeWidth || posY > gridSizeHeight)
+        if (posX >= gridSizeWidth || posY >= gridSizeHeight)
         {
             return false;
         }

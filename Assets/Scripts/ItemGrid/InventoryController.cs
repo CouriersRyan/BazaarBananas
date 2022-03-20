@@ -28,9 +28,19 @@ public class InventoryController : MonoBehaviour
     [SerializeField] private Transform canvas;
 
     private InventoryHighlight _highlight;
-
-
+    
     private InventoryItem _itemToHighlight;
+    private InventoryItem _itemOverlapHighlight;
+
+    public InventoryItem ItemToHighlight
+    {
+        get { return _itemToHighlight; }
+    }
+    public InventoryItem ItemOverlapHighlight
+    {
+        get { return _itemOverlapHighlight; }
+    }
+    
     private Vector2Int _oldPosition;
     private InventoryItem _overlapItem;
     private RectTransform _rectTransformOfSelectedItem;
@@ -67,6 +77,8 @@ public class InventoryController : MonoBehaviour
         if (SelectedItemGrid == null)
         {
             _highlight.Show(false);
+            _itemToHighlight = null;
+            _itemOverlapHighlight = null;
             return true;
         }
 
@@ -166,8 +178,22 @@ public class InventoryController : MonoBehaviour
         }
         else
         {
-            _highlight.Show(SelectedItemGrid.BoundaryCheck(positionOnGrid.x, positionOnGrid.y,
-                _selectedItem.Width, _selectedItem.Height));
+            bool inBounds = SelectedItemGrid.BoundaryCheck(positionOnGrid.x, positionOnGrid.y,
+                _selectedItem.Width, _selectedItem.Height);
+            _highlight.Show(inBounds);
+            if (inBounds)
+            {
+                if (!SelectedItemGrid.OverlapCheck(positionOnGrid.x, positionOnGrid.y,
+                        _selectedItem.Width, _selectedItem.Height, ref _itemOverlapHighlight))
+                {
+                    _itemOverlapHighlight = null;
+                }
+                else
+                {
+                    if(_itemOverlapHighlight == null) {_itemToHighlight = null;}
+                    else {_itemToHighlight = _selectedItem;}
+                }
+            }
             _highlight.SetSize(_selectedItem);
             _highlight.SetPosition(SelectedItemGrid, _selectedItem, positionOnGrid.x, positionOnGrid.y);
         }
@@ -191,8 +217,28 @@ public class InventoryController : MonoBehaviour
         InsertItem(itemToInsert, grid);
         return itemToInsert.gameObject;
     }
+    
+    public GameObject InsertItem(ItemGrid grid, GameObject prefab, ItemData itemData)
+    {
+        if (grid == null)
+        {
+            return null;
+        }
+        
+        CreateItem(prefab, itemData);
+        InventoryItem itemToInsert = _createdItem;
+        _createdItem = null;
+        InsertItem(itemToInsert, grid);
+        return itemToInsert.gameObject;
+    }
 
     private void CreateRandomItem(GameObject prefab)
+    {
+        int selectedItemID = Random.Range(0, items.Count);
+        CreateItem(prefab, items[selectedItemID]);
+    }
+    
+    private void CreateItem(GameObject prefab, ItemData itemData)
     {
         InventoryItem inventoryItem = Instantiate(prefab).GetComponent<InventoryItem>();
         var rectTransform = inventoryItem.RectTransform;
@@ -200,9 +246,8 @@ public class InventoryController : MonoBehaviour
 
         _createdItem = inventoryItem;
         _createdItemRectTransform = rectTransform;
-
-        int selectedItemID = Random.Range(0, items.Count);
-        inventoryItem.Set(items[selectedItemID]);
+        
+        inventoryItem.Set(itemData);
     }
     
     private void InsertItem(InventoryItem itemToInsert, ItemGrid itemGrid)

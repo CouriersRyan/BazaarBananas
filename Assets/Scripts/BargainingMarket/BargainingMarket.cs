@@ -7,7 +7,6 @@ using Random = UnityEngine.Random;
 //Market for bargaining
 public class BargainingMarket : MonoBehaviour, ITradeResources
 {
-    //TODO: have items on screen to represent the list of market items. Should be able to click on them to buy and sell.
     //TODO: hover over to get info.
     private static readonly float[] WeightCurve = {0.1f, 1, 1, 2, 3, 3, 2, 1, 1, 0.5f};
     private readonly WeightedRandom _scarcityRandom = new WeightedRandom(WeightCurve);
@@ -38,84 +37,48 @@ public class BargainingMarket : MonoBehaviour, ITradeResources
         _itemRandom = new WeightedRandom(temp);
     }
 
-    public TradeItem CreateItem()
+    public TradeItem SetItem(GameObject item, ItemData data)
     {
-        var resources = CalculateNewItem();
-
-        var emptyItem = new GameObject();
-        var marketItem = emptyItem.AddComponent<TradeItem>();
-        marketItem.SetTradeItem(resources[0], resources[1], resources[2], resources[3]);
-        SetItemValue(marketItem);
-
-        return marketItem;
-    }
-    
-    public TradeItem CreateItem(GameObject item)
-    {
-        var resources = CalculateNewItem();
-
-        var marketItem = item.AddComponent<TradeItem>();
-        marketItem.SetTradeItem(resources[0], resources[1], resources[2], resources[3]);
-        SetItemValue(marketItem);
-
-        return marketItem;
-    }
-
-    private int[] CalculateNewItem()
-    {
-        int[] resources = new int[4];
-
-        //Choose primary
-        var primary = _itemRandom.GetRandomIndex();
-
-        //Check if it will have secondary, or tertiary, etc.
-        var isSecondary = Random.Range(0f, 1f) < _secondaryChance;
-        var isTertiary = false;
-        if (isSecondary) isTertiary = Random.Range(0f, 1f) < _tertiaryChance;
-
-        //Calculate a size.
-        int size = Random.Range(0, 12) + 1;
-
-        resources[primary] = Random.Range(0, size) + 1;
-        size -= resources[primary];
-
-        if (isSecondary)
+        var tradeItem = item.GetComponent<TradeItem>();
+        if (tradeItem == null)
         {
-            if (isTertiary)
-            {
-                float[] temp = { 1, 1, 1, 1 };
-                var choose = new WeightedRandom(temp);
-                choose.SetWeight(primary, 0);
-                do
-                {
-                    int i = choose.GetRandomIndex();
-                    choose.SetWeight(i, 0);
-                    resources[i] = Random.Range(0, size) + 1;
-                    size -= resources[i];
-                } while (choose.GetTotalWeight() > 0 && size > 0);
-            }
-            else
-            {
-                var secondary = 0;
-                do
-                {
-                    secondary = _itemRandom.GetRandomIndex();
-                } while (secondary != primary);
-
-                resources[secondary] = size;
-            }
+            tradeItem = item.AddComponent<TradeItem>();
+            item.GetComponent<InventoryTradeItem>().tradeItem = tradeItem;
         }
 
-        return resources;
+        tradeItem.Gold = Random.Range(data.gold.x, data.gold.y + 1);
+        tradeItem.Protection = Random.Range(data.protection.x, data.protection.y + 1);
+        tradeItem.Tools = Random.Range(data.tools.x, data.tools.y + 1);
+        tradeItem.Food = Random.Range(data.food.x, data.food.y + 1);
+        
+        SetItemValue(tradeItem, data);
+        
+        return tradeItem;
     }
 
-    public void SetItemValue(TradeItem item)
+    //Chooses the primary attribute of the item.
+    public TradeResources ChoosePrimary()
     {
-        item.Value = 0;
-        item.Value += item.Gold * (10 - gold);
-        item.Value += item.Protection * (10 - protection);
-        item.Value += item.Tools * (10 - tools);
-        item.Value += item.Food * (10 - food);
+        //Choose primary
+        var primary = _itemRandom.GetRandomIndex();
+        return (TradeResources)primary;
+    }
+
+    public void SetItemValue(TradeItem item, ItemData data)
+    {
+        if (data.value < 0)
+        {
+            item.Value = 0;
+            item.Value += item.Gold * (10 - gold);
+            item.Value += item.Protection * (10 - protection);
+            item.Value += item.Tools * (10 - tools);
+            item.Value += item.Food * (10 - food);
+        }
+        else
+        {
+            item.Value = data.value;
+        }
+            
     }
 
     // Determines resource scarcity for trading with the player.

@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4808817243169376274}
   - component: {fileID: 4808817243169376276}
   - component: {fileID: 4808817243169376275}
-  - component: {fileID: 3527474445191101631}
+  - component: {fileID: -2545447644599811884}
+  - component: {fileID: 6708111693275925868}
   m_Layer: 5
   m_Name: InventoryItem
   m_TagString: Untagged
@@ -77,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3527474445191101631
+--- !u!114 &-2545447644599811884
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,10 +87,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4808817243169376273}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d1d79d49fb88ae4496728993385f04a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5cbe2d62a77fab3459bbe93a941b042d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 0}
   onGridPosX: 0
   onGridPosY: 0
   rotated: 0
+  tradeItem: {fileID: 6708111693275925868}
+--- !u!114 &6708111693275925868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4808817243169376273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d727df3b00bc847867f244f954a608, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

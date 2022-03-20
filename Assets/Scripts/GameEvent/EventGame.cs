@@ -5,6 +5,7 @@ using UnityEngine;
 // A class that is used to determine the prompts and choices available in an event.
 public class EventGame : MonoBehaviour
 {
+    //TODO: Adjust to work with new system.
     public string prompt;
     
     // An array of up to four choices per event that can change any of the four resources.

@@ -15,3 +15,8 @@ MonoBehaviour:
   width: 1
   height: 1
   itemIcon: {fileID: 21300000, guid: 11a9da45a5915d44991a0878ca9f61a7, type: 3}
+  value: -1
+  gold: {x: 0, y: 0}
+  protection: {x: 0, y: 0}
+  tools: {x: 1, y: 1}
+  food: {x: 2, y: 4}
