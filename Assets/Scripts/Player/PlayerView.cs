@@ -110,4 +110,10 @@ public class PlayerView : MonoBehaviour
     {
         return model.currentNode;
     }
+    
+    // Returns the player's inventory item grid
+    public ItemGrid GetInventory()
+    {
+        return model.playerInventory;
+    }
 }

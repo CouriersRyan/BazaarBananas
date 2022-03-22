@@ -35,7 +35,9 @@ public class GameManager : MonoBehaviour
     // Unity event from opening and closing an event or market, and ending the game.
     public UnityEvent m_OnEvent;
     public UnityEvent m_OffEvent;
+    public UnityEvent m_OnMarket;
     public UnityEvent m_EndGame;
+    public UnityEvent m_GameOver;
     
     // Defines the events and adds listeners from the Game Manager.
     private void Awake()
@@ -45,8 +47,9 @@ public class GameManager : MonoBehaviour
             m_OnEvent = new UnityEvent();
         }
         m_OnEvent.AddListener(ToggleMenu);
+        m_OnEvent.AddListener(OpenEvent);
         m_OnEvent.AddListener(CheckForLastNode);
-
+        
         if (m_OffEvent == null)
         {
             m_OffEvent = new UnityEvent();
@@ -60,8 +63,19 @@ public class GameManager : MonoBehaviour
         m_EndGame.AddListener(DisplayResults);
         m_EndGame.AddListener(CalculateScore);
 
+        if (m_OnMarket == null)
+        {
+            m_OnMarket = new UnityEvent();
+        }
+
         marketCamera.enabled = false;
         overviewCamera.enabled = true;
+
+        if (m_GameOver == null)
+        {
+            m_GameOver = new UnityEvent();
+        }
+        m_GameOver.AddListener(GameOver);
     }
 
     private Map _map; //Reference to the map in the scene.
@@ -89,11 +103,15 @@ public class GameManager : MonoBehaviour
     }
 
     // References to the menus the player will be interacting with in the game.
+    [SerializeField] private GameObject toggleMenu;
     [SerializeField] private GameObject marketMenu;
-    [SerializeField] private GameObject inventoryMenu;
     [SerializeField] private GameObject eventMenu;
     [SerializeField] private GameObject resultScreen;
     [SerializeField] private GameObject GUI;
+    [SerializeField] private GameObject toggleGrid;
+    [SerializeField] private GameObject marketGrid;
+    [SerializeField] private GameObject eventGrid;
+    [SerializeField] private GameObject playerGrid;
 
     [SerializeField] private TMP_Text[] bananas = new TMP_Text[5];
     [SerializeField] private TMP_Text[] resources = new TMP_Text[4];
@@ -103,16 +121,28 @@ public class GameManager : MonoBehaviour
     //Open/Closes the current menu based on the node.
     public void ToggleMenu()
     {
-        if (GetPlayer().GetCurrentNode().Obj.GetComponent<MapNode>().IsMarket)
-        {
-            marketMenu.SetActive(!marketMenu.activeInHierarchy);
-            inventoryMenu.SetActive(!inventoryMenu.activeInHierarchy);
-            SwitchCamera();
-        }
-        else
-        {
-            eventMenu.SetActive(!eventMenu.activeInHierarchy);
-        }
+        toggleMenu.SetActive(!toggleMenu.activeInHierarchy);
+        toggleGrid.SetActive(!toggleGrid.activeInHierarchy); 
+        SwitchCamera();
+    }
+
+    public void OpenEvent()
+    {
+        eventMenu.SetActive(true);
+        eventGrid.SetActive(true);
+        playerGrid.SetActive(true);
+        marketMenu.SetActive(false);
+        marketGrid.SetActive(false);
+    }
+
+    public void OpenMarket()
+    {
+        eventMenu.SetActive(false);
+        eventGrid.SetActive(false);
+        playerGrid.SetActive(true);
+        marketMenu.SetActive(true);
+        marketGrid.SetActive(true);
+        m_OnMarket.Invoke();
     }
 
     //Displays the results screen and hides all other screens.
@@ -120,8 +150,6 @@ public class GameManager : MonoBehaviour
     {
         resultScreen.SetActive(true);
         GUI.SetActive(false);
-        eventMenu.SetActive(false);
-        marketMenu.SetActive(false);
 
     }
     
@@ -172,5 +200,11 @@ public class GameManager : MonoBehaviour
     {
         overviewCamera.enabled = !overviewCamera.enabled;
         marketCamera.enabled = !marketCamera.enabled;
+    }
+
+    // Runs when the player fails a condition.
+    public void GameOver()
+    {
+        Debug.Log("Game Over!");
     }
 }

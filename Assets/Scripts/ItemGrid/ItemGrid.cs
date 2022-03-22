@@ -225,4 +225,21 @@ public class ItemGrid : MonoBehaviour
 
         return null;
     }
+
+    public InventoryItem[] GetItemsInGrid()
+    {
+        List<InventoryItem> items = new List<InventoryItem>();
+        for (int x = 0; x < gridSizeWidth; x++)
+        {
+            for (int y = 0; y < gridSizeHeight; y++)
+            {
+                if (!items.Contains(GetItem(x, y)) && GetItem(x, y) != null)
+                {
+                    items.Add(GetItem(x, y));
+                }
+            }
+        }
+
+        return items.ToArray();
+    }
 }

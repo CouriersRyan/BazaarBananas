@@ -64,7 +64,7 @@ public class BargainingMarket : MonoBehaviour, ITradeResources
         return (TradeResources)primary;
     }
 
-    public void SetItemValue(TradeItem item, ItemData data)
+    public virtual void SetItemValue(TradeItem item, ItemData data)
     {
         if (data.value < 0)
         {

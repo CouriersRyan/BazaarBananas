@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -183,6 +181,7 @@ public class InventoryController : MonoBehaviour
             _highlight.Show(inBounds);
             if (inBounds)
             {
+                _itemOverlapHighlight = null;
                 if (!SelectedItemGrid.OverlapCheck(positionOnGrid.x, positionOnGrid.y,
                         _selectedItem.Width, _selectedItem.Height, ref _itemOverlapHighlight))
                 {

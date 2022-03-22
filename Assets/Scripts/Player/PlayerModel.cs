@@ -22,6 +22,7 @@ using UnityEngine;
         }
     } // White
 
+    [SerializeField] public ItemGrid playerInventory;
 
     // For map navigation
     [NonSerialized] public Node currentNode;

@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 // Handles interactions between the inventory system and the rest of the game systems.
@@ -25,18 +27,37 @@ public class MarketGrid : MonoBehaviour
     [SerializeField] private ItemPreview preview;
     [SerializeField] private ItemPreview previewOverlap;
 
+    [SerializeField] private TMP_Text textTimer;
+    [SerializeField] private Button btnReroll;
+    [SerializeField] private float timer = 120f;
+    [SerializeField] private float rerollCost = 5;
+
+    private bool _onMarket;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _controller = GetComponent<InventoryController>();
         _player = GameManager.Instance.GetPlayer();
-        GameManager.Instance.m_OnEvent.AddListener(InitMarket);
+        GameManager.Instance.m_OnMarket.AddListener(InitMarket);
+        btnReroll.onClick.AddListener(RerollMarket);
+
+        GameManager.Instance.m_OffEvent.AddListener(() =>
+        {
+            _onMarket = false;
+        });
     }
 
 
     private void Update()
     {
+        timer -= Time.deltaTime;
+        textTimer.text = ((int)timer).ToString();
+        if (timer <= 0 && _onMarket)
+        {
+            GameManager.Instance.m_OffEvent.Invoke();
+        }
         PreviewItemStats();
         if (Input.GetMouseButtonDown(0))
         {
@@ -44,14 +65,33 @@ public class MarketGrid : MonoBehaviour
         }
     }
 
+    // Sets up a values for the market in the current node.
     private void InitMarket()
     {
+        _onMarket = true;
+        timer = 120f;
+        textTimer.text = ((int)timer).ToString();
         _market = _player.GetCurrentNode().Obj.GetComponent<MapNode>().Market;
         marketItemGrid.ClearGrid();
         extraItemGrid.ClearGrid();
+        SetPlayerItemValues();
         for (int i = 0; i < _market.MarketDefaultCount; i++)
         {
             CreateItem();
+        }
+    }
+
+    // Sets new values for the items in the player's inventory based on the current market.
+    private void SetPlayerItemValues()
+    {
+        var playerItems = _player.GetInventory().GetItemsInGrid();
+        if (playerItems.Length == 0)
+        {
+            return;
+        }
+        foreach (var item in playerItems)
+        {
+            _market.SetItemValue(((InventoryTradeItem)(item)).tradeItem, item.itemData);
         }
     }
 
@@ -75,7 +115,7 @@ public class MarketGrid : MonoBehaviour
             {
                 previewOverlap.gameObject.SetActive(true);
                 previewOverlap.SetPivot(preview.Pivot.x, preview.Pivot.y);
-                if (previewOverlap.ShowPreview(((InventoryTradeItem)_controller.ItemToHighlight).tradeItem,
+                if (previewOverlap.ShowPreview(((InventoryTradeItem)_controller.ItemOverlapHighlight).tradeItem,
                         Input.mousePosition.x + preview.Size.x,
                         Input.mousePosition.y))
                 {
@@ -168,4 +208,18 @@ public class MarketGrid : MonoBehaviour
             }
         }
     }
+
+    private void RerollMarket()
+    {
+        if (timer > rerollCost)
+        {
+            timer -= rerollCost;
+            marketItemGrid.ClearGrid();
+            for (int i = 0; i < _market.MarketDefaultCount; i++)
+            {
+                CreateItem();
+            }
+        }
+    }
+    
 }
