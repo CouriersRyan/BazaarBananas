@@ -2,11 +2,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemGrid : MonoBehaviour
 {
-    public const float TileSizeWidth = 100f;
-    public const float TileSizeHeight = 100f;
+    public const float TileSizeWidthUnscaled = 100f;
+    public const float TileSizeHeightUnscaled = 100f;
+    public static float TileSizeWidth {
+        get
+        {
+            if (_canvas == null)
+            {
+                _canvas = FindObjectOfType<Canvas>();
+            }
+            Debug.Log(_canvas.scaleFactor);
+            return TileSizeWidthUnscaled * _canvas.scaleFactor;
+        } 
+    }
+    public static float TileSizeHeight {
+        get
+        {
+            if (_canvas == null)
+            {
+                _canvas = FindObjectOfType<Canvas>();
+            }
+            return TileSizeWidthUnscaled * _canvas.scaleFactor;
+        } 
+    }
+
+    private static Canvas _canvas;
 
     private InventoryItem[,] _inventoryItemSlots;
 
@@ -24,7 +48,7 @@ public class ItemGrid : MonoBehaviour
     private void InitGrid(int width, int height)
     {
         _inventoryItemSlots = new InventoryItem[width, height];
-        Vector2 size = new Vector2(width * TileSizeWidth, height * TileSizeHeight);
+        Vector2 size = new Vector2(width * TileSizeWidthUnscaled, height * TileSizeHeightUnscaled);
         _rectTransform.sizeDelta = size;
     }
 
@@ -37,9 +61,12 @@ public class ItemGrid : MonoBehaviour
     {
         _positionOnGrid.x = mousePos.x - _rectTransform.position.x;
         _positionOnGrid.y = _rectTransform.position.y - mousePos.y;
-
+        
         _tileGridPosition.x = (int)(_positionOnGrid.x / TileSizeWidth);
         _tileGridPosition.y = (int)(_positionOnGrid.y / TileSizeHeight);
+        
+        //Debug.Log(_tileGridPosition);
+
 
         return _tileGridPosition;
     }
@@ -94,8 +121,8 @@ public class ItemGrid : MonoBehaviour
     public Vector2 CalcPosition(InventoryItem inventoryItem, int posX, int posY)
     {
         Vector2 position = new Vector2();
-        position.x = posX * TileSizeWidth + TileSizeWidth * inventoryItem.Width / 2;
-        position.y = -(posY * TileSizeHeight + TileSizeHeight * inventoryItem.Height / 2);
+        position.x = posX * TileSizeWidthUnscaled + TileSizeWidthUnscaled * inventoryItem.Width / 2;
+        position.y = -(posY * TileSizeHeightUnscaled + TileSizeHeightUnscaled * inventoryItem.Height / 2);
         return position;
     }
 
