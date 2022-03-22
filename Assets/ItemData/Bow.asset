@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b3ad09a7509634b93661833809937f, type: 3}
   m_Name: Bow
   m_EditorClassIdentifier: 
-  width: 3
-  height: 2
+  size:
+    arrays:
+    - cells: 0101
+    - cells: 0101
+    - cells: 0101
   itemIcon: {fileID: 21300000, guid: 2374ec228b2d0ca49874f7ec2a42dfbe, type: 3}
   value: -1
   gold: {x: 0, y: 0}

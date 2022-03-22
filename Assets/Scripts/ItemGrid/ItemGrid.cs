@@ -51,7 +51,7 @@ public class ItemGrid : MonoBehaviour
             return false;
         }
 
-        if (!OverlapCheck(posX, posY, inventoryItem.Width, inventoryItem.Height, ref overlapItem))
+        if (!OverlapCheck(posX, posY, inventoryItem.Width, inventoryItem.Height, inventoryItem, ref overlapItem))
         {
             overlapItem = null;
             return false;
@@ -76,7 +76,10 @@ public class ItemGrid : MonoBehaviour
         {
             for (int y = 0; y < inventoryItem.Height; y++)
             {
-                _inventoryItemSlots[posX + x, posY + y] = inventoryItem;
+                if (inventoryItem.Size(x, y))
+                {
+                    _inventoryItemSlots[posX + x, posY + y] = inventoryItem;
+                }
             }
         }
 
@@ -121,6 +124,35 @@ public class ItemGrid : MonoBehaviour
         
         return true;
     }
+
+    public bool OverlapCheck(int posX, int posY, int width, int height, InventoryItem selectedItem, ref InventoryItem overlapItem)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                if (selectedItem.Size(x, y))
+                {
+                    if (_inventoryItemSlots[posX + x, posY + y] != null)
+                    {
+                        if (overlapItem == null){
+                            overlapItem = _inventoryItemSlots[posX + x, posY + y];
+                        
+                        }
+                        else
+                        {
+                            if (overlapItem != _inventoryItemSlots[posX + x, posY + y])
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return true;
+    }
     
     private bool CheckAvailableSpace(int posX, int posY, int width, int height)
     {
@@ -129,6 +161,22 @@ public class ItemGrid : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 if (_inventoryItemSlots[posX + x, posY + y] != null)
+                {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+    
+    private bool CheckAvailableSpace(int posX, int posY, InventoryItem item)
+    {
+        for (int x = 0; x < item.Width; x++)
+        {
+            for (int y = 0; y < item.Height; y++)
+            {
+                if (_inventoryItemSlots[posX + x, posY + y] != null && item.Size(x, y))
                 {
                     return false;
                 }
@@ -155,7 +203,10 @@ public class ItemGrid : MonoBehaviour
         {
             for (int y = 0; y < cleanItem.Height; y++)
             {
-                _inventoryItemSlots[cleanItem.onGridPosX + x, cleanItem.onGridPosY + y] = null;
+                if (cleanItem.Size(x, y))
+                {
+                    _inventoryItemSlots[cleanItem.onGridPosX + x, cleanItem.onGridPosY + y] = null;
+                }
             }
         }
     }
@@ -216,7 +267,7 @@ public class ItemGrid : MonoBehaviour
         {
             for (int x = 0; x < width; x++)
             {
-                if (CheckAvailableSpace(x, y, itemToInsert.Width, itemToInsert.Height))
+                if (CheckAvailableSpace(x, y, itemToInsert))
                 {
                     return new Vector2Int(x, y);
                 }

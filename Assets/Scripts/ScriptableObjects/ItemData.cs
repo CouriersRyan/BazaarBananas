@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Items", menuName = "ScriptableObjects/ItemData", order = 1)]
 public class ItemData : ScriptableObject
 {
-    public int width = 1;
-    public int height = 1;
+    public int Width
+    {
+        get { return size.arrays.Count; }
+    }
+    public int Height
+    {
+        get { return size.arrays[0].cells.Count; }
+    }
+
+    public Matrix size;
 
     public Sprite itemIcon;
 

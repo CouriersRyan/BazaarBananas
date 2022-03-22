@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b3ad09a7509634b93661833809937f, type: 3}
   m_Name: GoodItem
   m_EditorClassIdentifier: 
-  width: 1
-  height: 1
+  size:
+    arrays:
+    - cells: 01
   itemIcon: {fileID: 21300000, guid: 4265bb0b064d2a94d979dea47f98bb3a, type: 3}
   value: -1
   gold: {x: 1, y: 1}

@@ -8332,14 +8332,18 @@ MonoBehaviour:
   itemPrefab: {fileID: 4808817243169376273, guid: 17640f2b5d3dbf54c9be01783a300701, type: 3}
   itemDataGold:
   - {fileID: 11400000, guid: b2d69fe95792ca94791484be10d0db37, type: 2}
+  - {fileID: 11400000, guid: 02d1ff1ac608d3f4ab297886c9f2a8cd, type: 2}
   itemDataProtection:
   - {fileID: 11400000, guid: c5e4ce1aeda4a9e43be00a92a878e209, type: 2}
   - {fileID: 11400000, guid: b404d3f9246f5fb41acfb48b1f15e0fd, type: 2}
   - {fileID: 11400000, guid: df7e73dcf131ce94ea3ff19ee003bc16, type: 2}
+  - {fileID: 11400000, guid: 02d1ff1ac608d3f4ab297886c9f2a8cd, type: 2}
   itemDataTools:
+  - {fileID: 11400000, guid: b8d3ea710665d7c40824ed7907dc52e8, type: 2}
   - {fileID: 11400000, guid: b8d3ea710665d7c40824ed7907dc52e8, type: 2}
   itemDataFood:
   - {fileID: 11400000, guid: db5d8a7942a9e2e499335075d92cfc78, type: 2}
+  - {fileID: 11400000, guid: 02d1ff1ac608d3f4ab297886c9f2a8cd, type: 2}
   defaultItem: {fileID: 11400000, guid: b1e55a1a3fbca4a4ebcd9c9a085410a5, type: 2}
   preview: {fileID: 1998589494}
   previewOverlap: {fileID: 1163113008}
