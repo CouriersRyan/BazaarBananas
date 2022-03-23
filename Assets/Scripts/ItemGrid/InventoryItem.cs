@@ -12,7 +12,7 @@ public class InventoryItem : MonoBehaviour
     {
         get
         {
-            if (rotated)
+            if (rotation == Rotation.Angle90 || rotation == Rotation.Angle270)
             {
                 return itemData.Width;
             }
@@ -27,8 +27,9 @@ public class InventoryItem : MonoBehaviour
     {
         get
         {
-            if (rotated)
-            {
+            if (rotation == Rotation.Angle90 || rotation == Rotation.Angle270)
+
+    {
                 return itemData.Height;
             }
             else
@@ -40,20 +41,27 @@ public class InventoryItem : MonoBehaviour
 
     public bool Size(int x, int y)
     {
-        if (rotated)
+        switch (rotation)
         {
-            return itemData.size[y, x];
+            case Rotation.Angle90:
+                return itemData.size[itemData.size.arrays.Count - 1 - y, x];
+
+            case Rotation.Angle180:
+                return itemData.size[itemData.size.arrays.Count - 1 - x, itemData.size.arrays[0].cells.Count - 1 - y];
+
+            case Rotation.Angle270:
+                return itemData.size[y, itemData.size.arrays[0].cells.Count - 1 - x];
+                break;
+            
+            case Rotation.Angle0:
+                return itemData.size[x, y];
         }
-        else
-        {
-            return itemData.size[x, y];
-        }
+
+        return false;
     }
 
     public int onGridPosX;
     public int onGridPosY;
-
-    public bool rotated = false;
 
     private RectTransform _rectTransform;
     public RectTransform RectTransform
@@ -88,11 +96,23 @@ public class InventoryItem : MonoBehaviour
         size.y = itemData.Height * ItemGrid.TileSizeHeight;
         _rectTransform.sizeDelta = size;
     }
-
+    
+    public Rotation rotation = Rotation.Angle0;
+    
     public void Rotate()
     {
-        rotated = !rotated;
-
-        RectTransform.rotation = Quaternion.Euler(0, 0, rotated ? 90f : 0f);
+        rotation = (int)(rotation + 90) > 359 ? 0 : rotation + 90;
+        
+        
+        
+        RectTransform.rotation = Quaternion.Euler(0, 0, (int)(rotation));
     }
+}
+
+public enum Rotation
+{
+    Angle0 = 0,
+    Angle90 = 90,
+    Angle180 = 180,
+    Angle270 = 270
 }

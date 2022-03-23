@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8b3ad09a7509634b93661833809937f, type: 3}
-  m_Name: GoodItem
+  m_Name: Net
   m_EditorClassIdentifier: 
-  itemName: Just an Item
+  itemName: Large Net
   size:
     arrays:
-    - cells: 01
-  itemIcon: {fileID: 21300000, guid: 4265bb0b064d2a94d979dea47f98bb3a, type: 3}
+    - cells: 01000100
+    - cells: 00010001
+    - cells: 01000100
+  itemIcon: {fileID: 21300000, guid: 269a3833c6ab94245b31e0618b0da339, type: 3}
   value: -1
-  gold: {x: 1, y: 1}
-  protection: {x: 1, y: 1}
-  tools: {x: 1, y: 1}
-  food: {x: 1, y: 1}
+  gold: {x: 0, y: 0}
+  protection: {x: 1, y: 2}
+  tools: {x: 7, y: 10}
+  food: {x: 2, y: 3}

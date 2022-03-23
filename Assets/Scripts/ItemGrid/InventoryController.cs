@@ -227,8 +227,13 @@ public class InventoryController : MonoBehaviour
         CreateItem(prefab, itemData);
         InventoryItem itemToInsert = _createdItem;
         _createdItem = null;
-        InsertItem(itemToInsert, grid);
-        return itemToInsert.gameObject;
+        if (InsertItem(itemToInsert, grid))
+        {
+            return itemToInsert.gameObject;
+        }
+        
+        Destroy(itemToInsert.gameObject);
+        return null;
     }
 
     private void CreateRandomItem(GameObject prefab)
@@ -249,17 +254,18 @@ public class InventoryController : MonoBehaviour
         inventoryItem.Set(itemData);
     }
     
-    private void InsertItem(InventoryItem itemToInsert, ItemGrid itemGrid)
+    private bool InsertItem(InventoryItem itemToInsert, ItemGrid itemGrid)
     {
 
         Vector2Int? posOnGrid = itemGrid.FindSpaceForItem(itemToInsert);
 
         if (posOnGrid == null)
         {
-            return; 
+            return false; 
         }
 
         itemGrid.PlaceItem(itemToInsert, posOnGrid.Value.x, posOnGrid.Value.y);
+        return true;
     }
     
     private bool PlaceItem(Vector2Int tileGridPos)

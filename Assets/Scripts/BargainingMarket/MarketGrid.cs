@@ -100,7 +100,10 @@ public class MarketGrid : MonoBehaviour
         // Other values can still depend on the market.
         var itemData = GetRandomItemData(_market.ChoosePrimary());
         var item = _controller.InsertItem(marketItemGrid, itemPrefab, itemData);
-        _market.SetItem(item, itemData);
+        if (item != null)
+        {
+            _market.SetItem(item, itemData);
+        }
     }
 
     private void PreviewItemStats()
@@ -116,10 +119,10 @@ public class MarketGrid : MonoBehaviour
                 previewOverlap.gameObject.SetActive(true);
                 previewOverlap.SetPivot(preview.Pivot.x, preview.Pivot.y);
                 if (previewOverlap.ShowPreview(((InventoryTradeItem)_controller.ItemOverlapHighlight).tradeItem,
-                        Input.mousePosition.x + preview.Size.x,
+                        Input.mousePosition.x + preview.Size.x * preview.CanvasScaleFactor,
                         Input.mousePosition.y))
                 {
-                    preview.ShowPreview(((InventoryTradeItem)_controller.ItemToHighlight).tradeItem, previewOverlap.Pos.x - preview.Size.x,
+                    preview.ShowPreview(((InventoryTradeItem)_controller.ItemToHighlight).tradeItem, previewOverlap.Pos.x - preview.Size.x * preview.CanvasScaleFactor,
                         previewOverlap.Pos.y);
                 }
             }

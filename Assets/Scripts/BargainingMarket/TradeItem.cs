@@ -6,12 +6,19 @@ using UnityEngine;
 public class TradeItem : MonoBehaviour, ITradeResources
 {
 
-    public void SetTradeItem(int gold, int protection, int tools, int food)
+    public void SetTradeItem(int gold, int protection, int tools, int food, string itemName)
     {
+        Name = itemName;
         Gold = gold;
         Protection = protection;
         Tools = tools;
         Food = food;
+    }
+
+    public string Name
+    {
+        get;
+        set;
     }
     
     public int Value

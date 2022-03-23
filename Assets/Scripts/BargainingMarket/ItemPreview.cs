@@ -7,7 +7,9 @@ using UnityEngine;
 public class ItemPreview : MonoBehaviour, ITradeResources
 {
     private RectTransform _rectTransform;
+    private Canvas _canvas;
 
+    [SerializeField] private TMP_Text itemName;
     [SerializeField] private TMP_Text gold;
     [SerializeField] private TMP_Text protection;
     [SerializeField] private TMP_Text tools;
@@ -19,10 +21,12 @@ public class ItemPreview : MonoBehaviour, ITradeResources
     void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
+        _canvas = FindObjectOfType<Canvas>();
     }
 
     public bool ShowPreview(TradeItem item, float posX, float posY)
     {
+        ItemName = item.Name;
         Gold = item.Gold;
         Protection = item.Protection;
         Tools = item.Tools;
@@ -37,15 +41,16 @@ public class ItemPreview : MonoBehaviour, ITradeResources
     {
         var size = _rectTransform.sizeDelta;
         var pivot = _rectTransform.pivot;
-        var up = (1 - pivot.y) * size.y;
-        var down = (pivot.y) * size.y;
-        var right = (1 - pivot.x) * size.x;
-        var left = (pivot.x) * size.x;
+        var scaleFactor = _canvas.scaleFactor;
+        var up = (1 - pivot.y) * scaleFactor * size.y;
+        var down = (pivot.y) * scaleFactor * size.y;
+        var right = (1 - pivot.x) * scaleFactor * size.x;
+        var left = (pivot.x) * scaleFactor * size.x;
 
         var isOverEdge = false;
-        if (_rectTransform.position.y + up > 1080)
+        if (_rectTransform.position.y + up > scaleFactor * 1080)
         {
-            pivot.y += ((_rectTransform.position.y + up) - 1080) / size.y;
+            pivot.y += ((_rectTransform.position.y + up) - scaleFactor * 1080) / size.y;
             isOverEdge = true;
         }
         if (_rectTransform.position.y - down < 0)
@@ -53,9 +58,9 @@ public class ItemPreview : MonoBehaviour, ITradeResources
             pivot.y += (_rectTransform.position.y - down) / size.y;
             isOverEdge = true;
         }
-        if (_rectTransform.position.x + right > 1920)
+        if (_rectTransform.position.x + right > scaleFactor * 1920)
         {
-            pivot.x += ((_rectTransform.position.x + right) - 1920) / size.x;
+            pivot.x += ((_rectTransform.position.x + right) - scaleFactor * 1920) / size.x;
             isOverEdge = true;
         }
         if (_rectTransform.position.y - left < 0)
@@ -72,9 +77,9 @@ public class ItemPreview : MonoBehaviour, ITradeResources
     {
         var pos = new Vector2(posX, posY);
 
-        pos.x = pos.x > 1920 ? 1920 : posX;
+        pos.x = pos.x > _canvas.scaleFactor * 1920  ? _canvas.scaleFactor * 1920 : posX;
         pos.x = pos.x < 0 ? 0 : posX;
-        pos.y = pos.y > 1080 ? 1080 : posY;
+        pos.y = pos.y > _canvas.scaleFactor * 1080 ? _canvas.scaleFactor * 1080 : posY;
         pos.y = pos.y < 0 ? 0 : posY;
 
         _rectTransform.position = pos;
@@ -86,6 +91,19 @@ public class ItemPreview : MonoBehaviour, ITradeResources
         _rectTransform.pivot = pivot;
     }
 
+    public string ItemName
+    {
+        get
+        {
+            return itemName.text;
+        }
+
+        set
+        {
+            itemName.text = value;
+        }
+    }
+    
     public int Gold
     {
         get
@@ -183,6 +201,14 @@ public class ItemPreview : MonoBehaviour, ITradeResources
         get
         {
             return _rectTransform.position;
+        }
+    }
+
+    public float CanvasScaleFactor
+    {
+        get
+        {
+            return _canvas.scaleFactor;
         }
     }
 }

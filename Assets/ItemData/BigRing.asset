@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b3ad09a7509634b93661833809937f, type: 3}
   m_Name: BigRing
   m_EditorClassIdentifier: 
+  itemName: Big Ring
   size:
     arrays:
     - cells: 01010101
     - cells: 01000001
     - cells: 01000001
     - cells: 01010101
-  itemIcon: {fileID: 21300000, guid: 162c961f79f03a7419bae8455ff18508, type: 3}
+  itemIcon: {fileID: 21300000, guid: 488861c788e56904fbe52b03ecd31e8a, type: 3}
   value: -1
-  gold: {x: 0, y: 0}
-  protection: {x: 0, y: 0}
+  gold: {x: 3, y: 4}
+  protection: {x: 1, y: 2}
   tools: {x: 0, y: 0}
   food: {x: 0, y: 0}

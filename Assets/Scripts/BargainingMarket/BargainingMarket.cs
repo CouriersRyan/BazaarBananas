@@ -8,21 +8,18 @@ using Random = UnityEngine.Random;
 public class BargainingMarket : MonoBehaviour, ITradeResources
 {
     //TODO: hover over to get info.
-    private static readonly float[] WeightCurve = {0.1f, 1, 1, 2, 3, 3, 2, 1, 1, 0.5f};
+    private static readonly float[] WeightCurve = { 0.1f, 1, 1, 2, 3, 3, 2, 1, 1, 0.5f };
     private readonly WeightedRandom _scarcityRandom = new WeightedRandom(WeightCurve);
 
     private WeightedRandom _itemRandom;
     private float _secondaryChance = 0.5f;
     private float _tertiaryChance = 0.6f;
 
-    private int _marketDefaultCount = 3;
+    private int _marketDefaultCount = 4;
 
     public int MarketDefaultCount
     {
-        get
-        {
-            return _marketDefaultCount;
-        }
+        get { return _marketDefaultCount; }
     }
 
     private void Awake()
@@ -46,13 +43,12 @@ public class BargainingMarket : MonoBehaviour, ITradeResources
             item.GetComponent<InventoryTradeItem>().tradeItem = tradeItem;
         }
 
-        tradeItem.Gold = Random.Range(data.gold.x, data.gold.y + 1);
-        tradeItem.Protection = Random.Range(data.protection.x, data.protection.y + 1);
-        tradeItem.Tools = Random.Range(data.tools.x, data.tools.y + 1);
-        tradeItem.Food = Random.Range(data.food.x, data.food.y + 1);
-        
+        tradeItem.SetTradeItem(Random.Range(data.gold.x, data.gold.y + 1),
+            Random.Range(data.protection.x, data.protection.y + 1), Random.Range(data.tools.x, data.tools.y + 1),
+            Random.Range(data.food.x, data.food.y + 1), data.itemName);
+
         SetItemValue(tradeItem, data);
-        
+
         return tradeItem;
     }
 
@@ -78,7 +74,6 @@ public class BargainingMarket : MonoBehaviour, ITradeResources
         {
             item.Value = data.value;
         }
-            
     }
 
     // Determines resource scarcity for trading with the player.
@@ -86,48 +81,28 @@ public class BargainingMarket : MonoBehaviour, ITradeResources
     [SerializeField] private int protection;
     [SerializeField] private int tools;
     [SerializeField] private int food;
-    
+
     public int Gold
     {
-        get
-        {
-            return gold;
-        }
-        set
-        {
-            gold = value;
-        }
+        get { return gold; }
+        set { gold = value; }
     } // White
-    public int Protection { 
-        get
-        {
-            return protection;
-        }
-        set
-        {
-            protection = value;
-        } 
+
+    public int Protection
+    {
+        get { return protection; }
+        set { protection = value; }
     } // Red
-    public int Tools {
-        get
-        {
-            return tools;
-        }
-        set
-        {
-            tools = value;
-        }
-        
+
+    public int Tools
+    {
+        get { return tools; }
+        set { tools = value; }
     } // Blue
-    public int Food {
-        get
-        {
-            return food;
-        }
-        set
-        {
-            food = value;
-        }
-        
+
+    public int Food
+    {
+        get { return food; }
+        set { food = value; }
     } // Green
 }

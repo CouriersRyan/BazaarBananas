@@ -15,6 +15,8 @@ public class ItemData : ScriptableObject
         get { return size.arrays[0].cells.Count; }
     }
 
+    public string itemName;
+
     public Matrix size;
 
     public Sprite itemIcon;

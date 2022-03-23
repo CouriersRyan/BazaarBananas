@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b3ad09a7509634b93661833809937f, type: 3}
   m_Name: TrinketOfQuestionableValue
   m_EditorClassIdentifier: 
+  itemName: Questionable Trinket
   size:
     arrays:
     - cells: 01
-  itemIcon: {fileID: 21300000, guid: e128ac5fe46fd204b82a5c318d2546c3, type: 3}
+  itemIcon: {fileID: 21300000, guid: 51ae01705f42acf4fb3125021574180c, type: 3}
   value: -1
   gold: {x: 0, y: 2}
   protection: {x: 0, y: 0}
