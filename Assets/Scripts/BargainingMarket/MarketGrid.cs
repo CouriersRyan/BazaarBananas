@@ -40,6 +40,7 @@ public class MarketGrid : MonoBehaviour
     {
         _controller = GetComponent<InventoryController>();
         _player = GameManager.Instance.GetPlayer();
+        GameManager.Instance.m_OnEvent.AddListener(SetPlayerItemValues);
         GameManager.Instance.m_OnMarket.AddListener(InitMarket);
         btnReroll.onClick.AddListener(RerollMarket);
 
@@ -74,27 +75,36 @@ public class MarketGrid : MonoBehaviour
         _market = _player.GetCurrentNode().Obj.GetComponent<MapNode>().Market;
         marketItemGrid.ClearGrid();
         extraItemGrid.ClearGrid();
-        SetPlayerItemValues();
+        //SetPlayerItemValues();
         for (int i = 0; i < _market.MarketDefaultCount; i++)
         {
             CreateItem();
         }
+        GameManager.Instance.m_OffEvent.AddListener(_market.OnCloseMarket);
+        GameManager.Instance.m_OffEvent.AddListener(_market.RemoveMarketFromCloseEvent);
     }
 
     // Sets new values for the items in the player's inventory based on the current market.
     private void SetPlayerItemValues()
     {
-        var playerItems = _player.GetInventory().GetItemsInGrid();
-        if (playerItems.Length == 0)
+        var mapNode = _player.GetCurrentNode().Obj.GetComponent<MapNode>();
+        if (mapNode.IsMarket)
         {
-            return;
-        }
-        foreach (var item in playerItems)
-        {
-            _market.SetItemValue(((InventoryTradeItem)(item)).tradeItem, item.itemData);
+            _market = mapNode.Market;
+            var playerItems = _player.GetInventory().GetItemsInGrid();
+            if (playerItems.Length == 0)
+            {
+                return;
+            }
+
+            foreach (var item in playerItems)
+            {
+                _market.SetItemValue(((InventoryTradeItem)(item)).tradeItem, item.itemData);
+            }
         }
     }
-
+    
+    // Creates an item using the data generated from the market node instance to pick ItemData to use.
     private void CreateItem()
     {
         // Other values can still depend on the market.
@@ -106,6 +116,7 @@ public class MarketGrid : MonoBehaviour
         }
     }
 
+    // Handles previewing an item when hovering over an item. Allows for comparison when you have an item selected and hovering over another.
     private void PreviewItemStats()
     {
         if (_controller.ItemToHighlight != null)
@@ -139,6 +150,7 @@ public class MarketGrid : MonoBehaviour
     }
 
 
+    // Retrieves a random ItemData SO from a list based on the passed in primary.
     private ItemData GetRandomItemData(TradeResources primary)
     {
         ItemData[] items = null;
@@ -170,6 +182,7 @@ public class MarketGrid : MonoBehaviour
         return defaultItem;
     }
     
+    // Handles gold change when placing an item in the market (selling).
     private void PlacedInMarket(InventoryItem placedItem)
     {
         if (_controller.SelectedItemGrid == marketItemGrid)
@@ -193,6 +206,7 @@ public class MarketGrid : MonoBehaviour
         }
     }
     
+    // Handles gold change when picking up an item from the market (buying).
     private void PickedUpFromMarket()
     {
         if (_controller.SelectedItemGrid == marketItemGrid)
@@ -212,6 +226,7 @@ public class MarketGrid : MonoBehaviour
         }
     }
 
+    // Removes all items currently in the market and replace it with new ones.
     private void RerollMarket()
     {
         if (timer > rerollCost)

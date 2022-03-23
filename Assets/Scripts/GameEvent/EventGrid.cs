@@ -43,8 +43,10 @@ public class EventGrid : MonoBehaviour
         else
         {
             _isConfirm = true;
-            if (CheckRequirements(eventItemGrid.GetItemsInGrid()))
+            var items = eventItemGrid.GetItemsInGrid();
+            if (CheckRequirements(items))
             {
+                eventItemGrid.ClearGrid();
                 foreach(var item in _event.eventData.reward)
                 {
                     CreateItem(item);
@@ -52,13 +54,14 @@ public class EventGrid : MonoBehaviour
             }
             else
             {
-                _event.eventData.penalty.RunPenalty();
+                if(_event.eventData.penalty != null)_event.eventData.penalty.RunPenalty();
             }
         }
     }
 
     public void InitEvent()
     {
+        
         _isConfirm = false;
         _event = _player.GetCurrentNode().Obj.GetComponent<MapNode>().EventGame;
         eventItemGrid.ClearGrid();

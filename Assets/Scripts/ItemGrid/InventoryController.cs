@@ -58,6 +58,11 @@ public class InventoryController : MonoBehaviour
         _highlight = GetComponent<InventoryHighlight>();
     }
 
+    private void Start()
+    {
+        GameManager.Instance.m_OffEvent.AddListener(ClearSelected);
+    }
+
     private void Update()
     {
         ItemIconDrag();
@@ -309,5 +314,12 @@ public class InventoryController : MonoBehaviour
         {
             _rectTransformOfSelectedItem.position = Input.mousePosition;
         }
+    }
+
+    private void ClearSelected()
+    {
+        if (_selectedItem == null) return;
+        Destroy(_selectedItem.gameObject);
+        _selectedItem = null;
     }
 }

@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 //Market for bargaining
 public class BargainingMarket : MonoBehaviour, ITradeResources
 {
-    //TODO: hover over to get info.
     private static readonly float[] WeightCurve = { 0.1f, 1, 1, 2, 3, 3, 2, 1, 1, 0.5f };
     private readonly WeightedRandom _scarcityRandom = new WeightedRandom(WeightCurve);
 
@@ -76,12 +76,23 @@ public class BargainingMarket : MonoBehaviour, ITradeResources
         }
     }
 
+    public virtual void OnCloseMarket()
+    {
+        
+    }
+
+    public void RemoveMarketFromCloseEvent()
+    {
+        GameManager.Instance.m_OffEvent.RemoveListener(OnCloseMarket);
+        GameManager.Instance.m_OffEvent.RemoveListener(RemoveMarketFromCloseEvent);
+    }
+    
     // Determines resource scarcity for trading with the player.
     [SerializeField] private int gold;
     [SerializeField] private int protection;
     [SerializeField] private int tools;
     [SerializeField] private int food;
-
+    
     public int Gold
     {
         get { return gold; }
