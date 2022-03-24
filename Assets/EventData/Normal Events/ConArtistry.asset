@@ -10,17 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a6a74f122099ad54b9e5b86705cc300a, type: 3}
-  m_Name: Hunger
+  m_Name: ConArtistry
   m_EditorClassIdentifier: 
-  prompt: You come across a starving family. They ask you for some food. (5 Food
-    req)
-  result: 
-  value: 0
-  gold: 0
+  prompt: You pass by a homeless artist. They ask for materials to complete a painting
+    as well as payment for the painting.
+  result: It seems to have been a scam
+  value: 50
+  gold: 10
   protection: 0
   tools: 0
-  food: 5
-  penalty: {fileID: 0}
+  food: 0
+  penalty: {fileID: 11400000, guid: e226a6242ba9d5f4d93a7cb573dc2e3b, type: 2}
   reward:
-  - {fileID: 11400000, guid: 04d66f52f843fce41a5bcfcfbe42a6f8, type: 2}
-  - {fileID: 11400000, guid: 04d66f52f843fce41a5bcfcfbe42a6f8, type: 2}
+  - {fileID: 11400000, guid: 7dcd9ed87ddd02c4f8a1eb3211114cb0, type: 2}

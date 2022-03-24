@@ -8282,6 +8282,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   events:
   - {fileID: 11400000, guid: dfa17c5d2401e9d4e9ead0f060a74101, type: 2}
+  - {fileID: 11400000, guid: ec1a786ec9c784947b0dc025a8ea123d, type: 2}
+  - {fileID: 11400000, guid: 958ad3288d71a8b409e7e671e42df21e, type: 2}
   tributeEvents:
   - {fileID: 11400000, guid: b8f129a78c0e0ce4693fd7b5527cd302, type: 2}
 --- !u!4 &1073738897 stripped

@@ -54,7 +54,8 @@ public class EventGrid : MonoBehaviour
             }
             else
             {
-                if(_event.eventData.penalty != null)_event.eventData.penalty.RunPenalty();
+                eventItemGrid.ClearGrid();
+                if(_event.eventData.penalty != null)_event.eventData.penalty.RunPenalty(this);
             }
         }
     }
@@ -68,23 +69,24 @@ public class EventGrid : MonoBehaviour
         prompt.text = _event.eventData.prompt;
     }
 
-    private void CreateItem(ItemData itemData)
+    public TradeItem CreateItem(ItemData itemData)
     {
         // Other values can still depend on the market.
         var item = _controller.InsertItem(eventItemGrid, itemPrefab, itemData);
-        SetItem(item, itemData);
+        return SetItem(item, itemData);
     }
 
-    private void SetItem(GameObject item, ItemData data)
+    private TradeItem SetItem(GameObject item, ItemData data)
     {
         var tradeItem = item.GetComponent<TradeItem>();
         tradeItem.Gold = Random.Range(data.gold.x, data.gold.y + 1);
         tradeItem.Protection = Random.Range(data.protection.x, data.protection.y + 1);
         tradeItem.Tools = Random.Range(data.tools.x, data.tools.y + 1);
         tradeItem.Food = Random.Range(data.food.x, data.food.y + 1);
+        return tradeItem;
     }
 
-    public bool CheckRequirements(InventoryItem[] items)
+    private bool CheckRequirements(InventoryItem[] items)
     {
         if (items.Length == 0)
         {

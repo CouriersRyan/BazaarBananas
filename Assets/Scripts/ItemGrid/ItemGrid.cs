@@ -224,7 +224,7 @@ public class ItemGrid : MonoBehaviour
         return toReturn;
     }
 
-    private void CleanItemFromGrid(InventoryItem cleanItem)
+    public void CleanItemFromGrid(InventoryItem cleanItem)
     {
         for (int x = 0; x < cleanItem.Width; x++)
         {

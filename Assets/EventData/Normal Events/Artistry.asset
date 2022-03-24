@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a74f122099ad54b9e5b86705cc300a, type: 3}
+  m_Name: Artistry
+  m_EditorClassIdentifier: 
+  prompt: You pass by a homeless artist. They ask for materials to complete a painting
+    as well as payment for the painting.
+  result: You received a painitng.
+  value: 99
+  gold: 3
+  protection: 2
+  tools: 5
+  food: 3
+  penalty: {fileID: 11400000, guid: 55d7aaf4b17dfc34ebb43d2c75a6e924, type: 2}
+  reward:
+  - {fileID: 11400000, guid: 8ee387645c263cd4d97d4dbbcc71cfd6, type: 2}
