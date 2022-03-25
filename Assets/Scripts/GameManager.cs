@@ -156,18 +156,19 @@ public class GameManager : MonoBehaviour
     //Calculates the score and set it on the end screen.
     public void CalculateScore()
     {
-        _player.GetGold(TradeResources.Gold);
-        _player.GetGold(TradeResources.Protection);
-        _player.GetGold(TradeResources.Tools);
-        _player.GetGold(TradeResources.Food);
 
         var total = 0;
         
-        for (int i = 0; i < resources.Length; i++)
+        bananas[0].text = _player.GetGold().ToString();
+        resources[0].text = _player.GetGold().ToString();
+        total += _player.GetGold();
+
+        var resourceTotals = _player.GetResources();
+        
+        for (int i = 1; i < resources.Length; i++)
         {
-            bananas[i].text = _player.GetGold((TradeResources)i).ToString();
-            resources[i].text = _player.GetGold((TradeResources)i).ToString();
-            total += _player.GetGold((TradeResources)i);
+            bananas[i].text = resourceTotals[i].ToString();
+            resources[i].text = resourceTotals[i].ToString();
         }
 
         bananas[^1].text = total.ToString();

@@ -86,15 +86,24 @@ public class PlayerView : MonoBehaviour
     }
     
     // Returns the value of a resource.
-    public int GetGold(TradeResources resource)
+    public int GetGold()
     {
-        switch (resource)
+        return model.Gold;
+    }
+
+    public int[] GetResources()
+    {
+        int[] resourceTotals = new int[4];
+        var items = model.playerInventory.GetItemsInGrid();
+        foreach (var item in items)
         {
-            case TradeResources.Gold:
-                return model.Gold;
+            resourceTotals[(int)TradeResources.Gold] += ((InventoryTradeItem)item).tradeItem.Gold;
+            resourceTotals[(int)TradeResources.Protection] += ((InventoryTradeItem)item).tradeItem.Protection;
+            resourceTotals[(int)TradeResources.Tools] += ((InventoryTradeItem)item).tradeItem.Tools;
+            resourceTotals[(int)TradeResources.Food] += ((InventoryTradeItem)item).tradeItem.Food;
         }
 
-        return -1;
+        return resourceTotals;
     }
 
     // Check if the resources can be changed by a certain value and remain nonnegative.

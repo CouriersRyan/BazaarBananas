@@ -9,7 +9,7 @@ public class FirstNodePenalty : Penalty
         var playerView = GameManager.Instance.GetPlayer();
         if (playerView.GetCurrentNode().GCost == 0)
         {
-            playerView.ChangeGold(-playerView.GetGold(TradeResources.Gold));
+            playerView.ChangeGold(-playerView.GetGold());
         }
         else
         {
