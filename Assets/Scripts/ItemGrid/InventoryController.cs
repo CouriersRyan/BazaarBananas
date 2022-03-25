@@ -300,7 +300,7 @@ public class InventoryController : MonoBehaviour
         if (_selectedItem != null)
         {
             _rectTransformOfSelectedItem = _selectedItem.RectTransform;
-            _rectTransformOfSelectedItem.SetParent(_rectTransformOfSelectedItem.parent.parent);
+            _rectTransformOfSelectedItem.SetParent(_rectTransformOfSelectedItem.parent.parent.parent);
             _rectTransformOfSelectedItem.SetAsLastSibling();
             return true;
         }
