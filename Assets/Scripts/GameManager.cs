@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject marketMenu;
     [SerializeField] private GameObject eventMenu;
     [SerializeField] private GameObject resultScreen;
+    [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject GUI;
     [SerializeField] private GameObject toggleGrid;
     [SerializeField] private GameObject marketGrid;
@@ -206,6 +207,7 @@ public class GameManager : MonoBehaviour
     // Runs when the player fails a condition.
     public void GameOver()
     {
-        Debug.Log("Game Over!");
+        gameOverScreen.SetActive(true);
+        GUI.SetActive(false);
     }
 }
