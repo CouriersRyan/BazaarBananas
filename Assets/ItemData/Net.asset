@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8b3ad09a7509634b93661833809937f, type: 3}
+  m_Name: Net
+  m_EditorClassIdentifier: 
+  itemName: Large Net
+  size:
+    arrays:
+    - cells: 01000100
+    - cells: 00010001
+    - cells: 01000100
+  itemIcon: {fileID: 21300000, guid: 269a3833c6ab94245b31e0618b0da339, type: 3}
+  value: -1
+  gold: {x: 0, y: 0}
+  protection: {x: 1, y: 2}
+  tools: {x: 7, y: 10}
+  food: {x: 2, y: 3}

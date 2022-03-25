@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a74f122099ad54b9e5b86705cc300a, type: 3}
+  m_Name: Hunger
+  m_EditorClassIdentifier: 
+  prompt: You come across a starving family. They ask you for some food. (5 Food
+    req)
+  result: 
+  value: 0
+  gold: 0
+  protection: 0
+  tools: 0
+  food: 5
+  penalty: {fileID: 0}
+  reward:
+  - {fileID: 11400000, guid: 04d66f52f843fce41a5bcfcfbe42a6f8, type: 2}
+  - {fileID: 11400000, guid: 04d66f52f843fce41a5bcfcfbe42a6f8, type: 2}

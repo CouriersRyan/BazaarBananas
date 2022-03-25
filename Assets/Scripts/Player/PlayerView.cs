@@ -15,9 +15,6 @@ public class PlayerView : MonoBehaviour
     
     // UI References
     [SerializeField] private TMP_Text goldText;
-    [SerializeField] private TMP_Text protectionText;
-    [SerializeField] private TMP_Text toolsText;
-    [SerializeField] private TMP_Text foodText;
 
     void Start()
     {
@@ -80,63 +77,40 @@ public class PlayerView : MonoBehaviour
     public void UpdateUI()
     {
         goldText.text = model.Gold.ToString() + "g";
-        protectionText.text = model.Protection.ToString();
-        toolsText.text = model.Tools.ToString();
-        foodText.text = model.Food.ToString();
     }
     
     // Changes values of a designated trade resource.
-    public void ChangeResource(TradeResources resource, int value)
+    public void ChangeGold(int value)
     {
-        switch (resource)
-        {
-            case TradeResources.Gold:
-                model.Gold += value;
-                break;
-            
-            case TradeResources.Food:
-                model.Food += value;
-                break;
-            
-            case TradeResources.Protection:
-                model.Protection += value;
-                break;
-            
-            case TradeResources.Tools:
-                model.Tools += value;
-                break;
-        }
+        model.Gold += value;
     }
     
     // Returns the value of a resource.
-    public int GetResource(TradeResources resource)
+    public int GetGold()
     {
-        switch (resource)
+        return model.Gold;
+    }
+
+    public int[] GetResources()
+    {
+        int[] resourceTotals = new int[4];
+        var items = model.playerInventory.GetItemsInGrid();
+        foreach (var item in items)
         {
-            case TradeResources.Gold:
-                return model.Gold;
-
-            case TradeResources.Food:
-                return model.Food;
-
-            case TradeResources.Protection:
-                return model.Protection;
-
-            case TradeResources.Tools:
-                return model.Tools;
+            resourceTotals[(int)TradeResources.Gold] += ((InventoryTradeItem)item).tradeItem.Gold;
+            resourceTotals[(int)TradeResources.Protection] += ((InventoryTradeItem)item).tradeItem.Protection;
+            resourceTotals[(int)TradeResources.Tools] += ((InventoryTradeItem)item).tradeItem.Tools;
+            resourceTotals[(int)TradeResources.Food] += ((InventoryTradeItem)item).tradeItem.Food;
         }
 
-        return -1;
+        return resourceTotals;
     }
 
     // Check if the resources can be changed by a certain value and remain nonnegative.
-    public bool CheckResources(int goldDelta, int protectDelta, int toolsDelta, int foodDelta)
+    public bool CheckGold(int goldDelta)
     {
         var isValid = true;
         isValid = !(model.Gold < -goldDelta) && isValid;
-        isValid = !(model.Protection < -protectDelta) && isValid;
-        isValid = !(model.Tools < -toolsDelta) && isValid;
-        isValid = !(model.Food < -foodDelta) && isValid;
         return isValid;
     }
     
@@ -144,5 +118,11 @@ public class PlayerView : MonoBehaviour
     public Node GetCurrentNode()
     {
         return model.currentNode;
+    }
+    
+    // Returns the player's inventory item grid
+    public ItemGrid GetInventory()
+    {
+        return model.playerInventory;
     }
 }
