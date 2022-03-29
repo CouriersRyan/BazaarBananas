@@ -40,6 +40,7 @@ public class InventoryController : MonoBehaviour
     }
     
     private Vector2Int _oldPosition;
+    private Rotation _oldRotation = Rotation.NoAngle;
     private InventoryItem _overlapItem;
     private RectTransform _rectTransformOfSelectedItem;
 
@@ -135,6 +136,7 @@ public class InventoryController : MonoBehaviour
         }
 
         _selectedItem.Rotate();
+        _highlight.SetSize(_selectedItem);
     }
 
     private Vector2Int GetTileGridPos()

@@ -33,21 +33,19 @@ public class InventoryHighlight : MonoBehaviour
 
     public void SetSize(InventoryItem item)
     {
-        if (_currentItem != item)
+        HideHightlights();
+        for (int x = 0; x < item.Width; x++)
         {
-            _currentItem = item;
-            HideHightlights();
-            for (int x = 0; x < item.Width; x++)
+            for (int y = 0; y < item.Height; y++)
             {
-                for (int y = 0; y < item.Height; y++)
+                if (item.Size(x, y))
                 {
-                    if (item.Size(x, y))
-                    {
-                        var highlight = SpawnHighlighterFromPool();
-                        highlight.transform.localPosition = new Vector2(
-                            (-item.Width * ItemGrid.TileSizeWidthUnscaled / 2) + x * ItemGrid.TileSizeWidthUnscaled + (ItemGrid.TileSizeWidthUnscaled/2),
-                            (item.Height * ItemGrid.TileSizeHeightUnscaled / 2) - (y * ItemGrid.TileSizeHeightUnscaled) - (ItemGrid.TileSizeHeightUnscaled/2));
-                    }
+                    var highlight = SpawnHighlighterFromPool();
+                    highlight.transform.localPosition = new Vector2(
+                        (-item.Width * ItemGrid.TileSizeWidthUnscaled / 2) + x * ItemGrid.TileSizeWidthUnscaled +
+                        (ItemGrid.TileSizeWidthUnscaled / 2),
+                        (item.Height * ItemGrid.TileSizeHeightUnscaled / 2) - (y * ItemGrid.TileSizeHeightUnscaled) -
+                        (ItemGrid.TileSizeHeightUnscaled / 2));
                 }
             }
         }
